@@ -1,3 +1,4 @@
+# OntPub
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
@@ -97,7 +98,7 @@
                 [ sh:datatype xsd:dateTimeStamp ]
             ) ;
             sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the sdo:dateCreated, sdo:dateModified & sdo:dateIssued properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
-        ] ;                
+        ] ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.7>
@@ -113,7 +114,7 @@
         sh:minCount 1 ;
 	    sh:description "Requirement 2.1.7 Each ontology MUST have at least one creator, indicated using sdo:creator and at least one sdo:publisher property that must be IRI values indicating agents, that is instances of sdo:Person, sdo:Organization or a subclass of either" ;
         sh:class sdo:Organization  , sdo:Person ;
-	] ;    
+	] ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.8>
@@ -132,12 +133,12 @@
 <https://w3id.org/profile/ontpub/req/2.1.9>
     a sh:NodeShape ;
     sh:message "Requirement 2.1.9 Provenance for an owl:Ontology MUST be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
-    sh:or ( 
-        [ 
+    sh:or (
+        [
             sh:minCount 1 ;
             sh:path prov:wasDerivedFrom ;
             sh:message "This is a message about prov:wasDerivedFrom" ;
-        ] 
+        ]
         [
             sh:minCount 1 ;
             sh:path dcterms:source ;
@@ -147,14 +148,14 @@
             sh:minCount 1 ;
             sh:path dcterms:provenance ;
             sh:message "This is a message about dcterms:provenance" ;
-        ] 
+        ]
     ) ;
     sh:targetClass owl:Ontology ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9b>
     a sh:NodeShape ;
-    sh:targetSubjectsOf dcterms:provenance ;    
+    sh:targetSubjectsOf dcterms:provenance ;
     sh:property [
         a sh:PropertyShape ;
         sh:maxCount 1 ;
@@ -165,7 +166,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.1.9c>
     a sh:NodeShape ;
-    sh:targetSubjectsOf dcterms:source ;    
+    sh:targetSubjectsOf dcterms:source ;
     sh:property [
         a sh:PropertyShape ;
         sh:maxCount 1 ;
@@ -176,7 +177,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.1.9d>
     a sh:NodeShape ;
-    sh:targetSubjectsOf prov:wasDerivedFrom ;    
+    sh:targetSubjectsOf prov:wasDerivedFrom ;
     sh:property [
         a sh:PropertyShape ;
         sh:maxCount 1 ;
@@ -225,6 +226,8 @@
         a sh:PropertyShape ;
         sh:path owl:versionIRI ;
         sh:nodeKind sh:IRI ;
+        sh:minCount 1;
+        sh:severity sh:Warning ;
         sh:message "Requirement 2.1.10: OWL ontologies SHOULD indicate a version using the property owl:versionIRI with an IRI object." ;
     ] ;
 .
@@ -236,6 +239,8 @@
         a sh:PropertyShape ;
         sh:path sdo:codeRespository ;
         sh:datatype xsd:anyURI ;
+        sh:minCount 1;
+        sh:severity sh:Warning ;
         sh:message "Requirement 2.1.11: OWL ontologies SHOULD indicate any online version controlled source code repository storing the ontology and related content with the sdo:codeRespository with a xsd:anyURI object." ;
     ] ;
 .
@@ -247,6 +252,8 @@
         a sh:PropertyShape ;
         sh:path sdo:license ;
         sh:datatype xsd:anyURI ;
+        sh:minCount 1;
+        sh:severity sh:Warning ;
         sh:message "Requirement 2.1.12: Ontologies SHOULD present a license for its use indicated with the sdo:license use indicating either the literal text of a license or a URL of a license using the datatype xsd:anyURI." ;
     ] ;
 .
@@ -272,6 +279,8 @@
             [ sh:class sdo:Organization ]
             [ sh:class sdo:Person ]
         ) ;
+        sh:minCount 1;
+        sh:severity sh:Warning ;
         sh:message "Requirement 2.1.14: Ontologies SHOULD present a copyright information for it indicated with properties sdo:copyrightHolder, sdo:copyrightNotice and sdo:copyrightYear. sdo:copyrightHolder may be used with a text object or, preferrably, an sdo:Person or sdo:Organization object." ;
     ] ;
 .
@@ -309,7 +318,7 @@
         sh:path skos:prefLabel ;
         sh:minCount 1 ;
         sh:uniqueLang true ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;        
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
         sh:message "Requirement 2.2.1: Each element instance MUST have at least one title indicated using the skos:prefLabel property that must be a language-typed text literal value. Only one value per language is allowed." ;
     ] ;
 .
@@ -322,7 +331,7 @@
         sh:path skos:definition ;
         sh:minCount 1 ;
         sh:uniqueLang true ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;        
+        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
         sh:message "Requirement 2.2.2: Each element instance MUST have at least one definition indicated using the skos:definition property that must be a language-typed text literal value. Only one value per language is allowed." ;
     ] ;
 .
@@ -330,23 +339,24 @@
 <https://w3id.org/profile/ontpub/req/2.2.3>
     a sh:NodeShape ;
     sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
-    sh:or ( 
-        [ 
+    sh:or (
+        [
             sh:minCount 1 ;
             sh:path prov:wasDerivedFrom ;
-            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;   
-        ] 
+            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
+        ]
         [
             sh:minCount 1 ;
             sh:path dcterms:source ;
-            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;   
+            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
         ]
         [
             sh:minCount 1 ;
             sh:path dcterms:provenance ;
-            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;   
-        ] 
-    ) ; 
+            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
+        ]
+    ) ;
+    sh:severity sh:Warning ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.2.4>
@@ -376,7 +386,7 @@
 #   owl:Class
 #
 
-# 2.3.1 Each owl:Class instance's IRI's unique element SHOULD be presented in uppercase-leading CamelCase and in the singular form, e.g. for a class indicating school students, SchoolStudent, not schoolstudent or schoolStudent or SchoolStudents. 
+# 2.3.1 Each owl:Class instance's IRI's unique element SHOULD be presented in uppercase-leading CamelCase and in the singular form, e.g. for a class indicating school students, SchoolStudent, not schoolstudent or schoolStudent or SchoolStudents.
 
 #
 #   rdfs:Property
@@ -394,7 +404,7 @@
 #   owl:Axiom
 #
 
-# 2.6.1 Each owl:Axiom instance, if identified with an IRI, SHOULD have that IRI's unique element presented in uppercase-leading CamelCase and in the singular form, e.g. for an axiom indicating that a Man s a Person, ManIsAPerson, not manIsAPerson or manisaperson or man-is-a-person. 
+# 2.6.1 Each owl:Axiom instance, if identified with an IRI, SHOULD have that IRI's unique element presented in uppercase-leading CamelCase and in the singular form, e.g. for an axiom indicating that a Man s a Person, ManIsAPerson, not manIsAPerson or manisaperson or man-is-a-person.
 
 #
 #   Agent
@@ -414,26 +424,26 @@
         ] ;
 .
 
-<https://w3id.org/profile/ontpub/req/2.7.3>
+<https://w3id.org/profile/ontpub/req/2.7.3a>
 	a sh:NodeShape ;
 	sh:targetClass sdo:Organization ;
-        sh:property [
-            sh:path sdo:url ;
-            sh:minCount 1 ;
-            sh:datatype xsd:anyURI ;
-        ] ;
-        sh:message "Requirement 2.7.3: Each agent MUST indicate either a sdo:url (for organizations) or a sdo:email (for people) property with a URL or email value"
+    sh:property [
+        sh:path sdo:url ;
+        sh:minCount 1 ;
+        sh:datatype xsd:anyURI ;
+        sh:message "Requirement 2.7.3: Each organisation MUST indicate an sdo:url property with a URL value" ;
+    ] ;
 .
 
-<https://w3id.org/profile/ontpub/req/2.7.3>
+<https://w3id.org/profile/ontpub/req/2.7.3b>
 	a sh:NodeShape ;
 	sh:targetClass sdo:Person ;
-        sh:property [
-            sh:path sdo:email ;
-            sh:minCount 1 ;
-            sh:datatype xsd:anyURI ;
-        ] ;
-        sh:message "Requirement 2.7.3: Each agent MUST indicate either a sdo:url (for organizations) or a sdo:email (for people) property with a URL or email value"
+    sh:property [
+        sh:path sdo:email ;
+        sh:minCount 1 ;
+        sh:datatype xsd:anyURI ;
+        sh:message "Requirement 2.7.3: Each person MUST indicate an sdo:email property with an email value" ;
+    ] ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.7.4>
@@ -454,7 +464,7 @@
             [ sh:class sdo:Person ]
         ) ;
         sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations."
-    ] ;  
+    ] ;
     sh:property [
         sh:path sdo:subOrganization ;
         sh:or (
@@ -462,7 +472,7 @@
             [ sh:class sdo:Person ]
         ) ;
         sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations."
-    ] ;       
+    ] ;
 .
 
-# 2.7.5 Other schema.org Agent properties, such as sdo:honorificPrefix and so on many be used for additional agent information 
+# 2.7.5 Other schema.org Agent properties, such as sdo:honorificPrefix and so on many be used for additional agent information
