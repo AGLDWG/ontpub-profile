@@ -74,7 +74,7 @@
                 [ sh:datatype xsd:date ]
                 [ sh:datatype xsd:dateTimeStamp ]
             ) ;
-            sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date and exactly one modified date indicated using the sdo:dateCreated & sdo:dateModified properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
+            sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the sdo:dateCreated, sdo:dateModified & sdo:dateIssued properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
         ] ;
         sh:property [
             sh:path sdo:dateModified ;
@@ -85,7 +85,7 @@
                 [ sh:datatype xsd:date ]
                 [ sh:datatype xsd:dateTimeStamp ]
             ) ;
-            sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date and exactly one modified date indicated using the sdo:dateCreated & sdo:dateModified properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
+            sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the sdo:dateCreated, sdo:dateModified & sdo:dateIssued properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
         ] ;
         sh:property [
             sh:path sdo:dateIssued ;
@@ -96,7 +96,7 @@
                 [ sh:datatype xsd:date ]
                 [ sh:datatype xsd:dateTimeStamp ]
             ) ;
-            sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date and exactly one modified date indicated using the sdo:dateCreated & sdo:dateModified properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
+            sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the sdo:dateCreated, sdo:dateModified & sdo:dateIssued properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
         ] ;                
 .
 
@@ -278,7 +278,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.1.15>
     a sh:NodeShape ;
-    sh:targetNode owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom ;
+    sh:targetNode owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
         sh:path [ sh:inversePath rdf:type ] ;
         sh:nodeKind sh:IRI ;
@@ -288,7 +288,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.1.16>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom ;
+    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
         a sh:PropertyShape ;
         sh:path rdfs:isDefinedBy ;
@@ -303,7 +303,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.2.1>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom ;
+    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
         a sh:PropertyShape ;
         sh:path skos:prefLabel ;
@@ -316,7 +316,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.2.2>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom ;
+    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
         a sh:PropertyShape ;
         sh:path skos:definition ;
@@ -329,7 +329,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.2.3>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom ;
+    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:or ( 
         [ 
             sh:minCount 1 ;
@@ -351,7 +351,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.2.4>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom ;
+    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
         a sh:PropertyShape ;
         sh:path skos:example ;
@@ -363,7 +363,7 @@
 
 <https://w3id.org/profile/ontpub/req/2.2.5>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom ;
+    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
         a sh:PropertyShape ;
         sh:path sdo:identifier ;
