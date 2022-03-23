@@ -140,38 +140,32 @@
           2.1.5 Each ontology <em>MUST</em> have exactly one definition value indicated using the <code>skos:definition</code> property that must be a text literal values
         </p>
         <p class="req">
-          2.1.6 Each ontology <em>MUST</em> have exactly one created date and exactly one modified date indicated using the <code>sdo:dateCreated</code> and <code>sdo:dateModified</code> properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal value
+          2.1.6 Each ontology <em>MUST</em> have exactly one created, exactly one modified and exactly one issued date indicated using the <code>sdo:dateCreated</code>, <code>sdo:dateModified</code> &amp; <code>sdo:dateIssued</code> properties respectively that must be either xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values
+        </p>      
+        <p class="req">
+          2.1.7 Each ontology <em>MUST</em> have at least one creator, indicated using <code>sdo:creator</code> and at least one <code>sdo:publisher</code> property that must be IRI values indicating agents, that is instances of <code>sdo:Person</code>, <code>sdo:Organization</code> or a subclass of either
         </p>
         <p class="req">
-          2.1.7 Each ontology <em>MAY</em> have at most one issued date indicated using the <code>sdo:dateIssued</code> that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal value
-        </p>        
-        <p class="req">
-          2.1.8 Each ontology <em>MUST</em> have at least one creator, indicated using <code>sdo:creator</code> property that must be a IRI value indicating an agent, that is an instance of <code>sdo:Person</code>, <code>sdo:Organization</code> or a subclass of either
-        </p>
-        <p class="req">
-          2.1.9 Each ontology <em>MUST</em> have at least one publisher, indicated using <code>sdo:publisher</code> property that must be a IRI value indicating an agent, that is an instance of <code>sdo:Person</code>, <code>sdo:Organization</code> or a subclass of either
-        </p>
-        <p class="req">
-          2.1.10 Each ontology <em>MAY</em> have at least any number of contributors, indicated using <code>sdo:contributor</code> property that must be a IRI value indicating an agent, that is an instance of <code>sdo:Person</code>, <code>sdo:Organization</code> or a subclass of either
+          2.1.8 Each ontology <em>MAY</em> have at least any number of contributors, indicated using <code>sdo:contributor</code> property that must be a IRI value indicating an agent, that is an instance of <code>sdo:Person</code>, <code>sdo:Organization</code> or a subclass of either
         </p>        
         <p>
           To be able to link ontologies to their non-ontology source information:
         </p>
         <p class="req">
-          2.1.11 Provenance for an <code>owl:Ontology</code> <em>MUST</em> be indicated by at least one of the following properties: <code>dcterms:provenance</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
+          2.1.9 Provenance for an <code>owl:Ontology</code> <em>MUST</em> be indicated by at least one of the following properties: <code>dcterms:provenance</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
         </p>
         <p>
           If an ontology is based on another Semantic Web resource, such as an ontology or a vocabulary, <code>prov:wasDerivedFrom</code> should be used to indicate that resource's IRI. If the ontology is based on a resource that is identified by a IRI but which is not a Semantic Web resource, <code>dcterms:source</code> should be used to indicate the resource's IRI. If the ontology is based on something which cannot be identified by IRI, a statement about the thing should be given in a literal value indicated with the <code>dcterms:provenance</code> property. If the ontology is not based on any other resource or source of information, i.e. this ontology is its only expression, this should be communicated by use of the <code>dcterms:provenance</code> indicating the phrase "This ontology is expressed for the first time here".
         </p>
         <p>To keep track of versions:</p>
         <p class="req">
-          2.1.12 OWL ontologies <em>SHOULD</em> indicate a version using the property <code>owl:versionIRI</code> with an IRI object.</p>
+          2.1.10 OWL ontologies <em>SHOULD</em> indicate a version using the property <code>owl:versionIRI</code> with an IRI object.</p>
         <p>
           In OWL, categories of things are called <em>classes</em>, relations between things <em>properties</em>, objects <em>individuals</em> and statements in general <em>axioms</em> (see the OWL Primer<sup><a href="#owl2-primer">ref</a></sup>).
         </p>
         <p>To assist users locating additional online resources:</p>
         <p class="req">
-          2.1.13 OWL ontologies <em>SHOULD</em> indicate any online version controlled source code repository storing the ontology and related content with the <code>sdo:codeRespository</code> with a <code>xsd:anyURI</code> object.
+          2.1.11 OWL ontologies <em>SHOULD</em> indicate any online version controlled source code repository storing the ontology and related content with the <code>sdo:codeRespository</code> with a <code>xsd:anyURI</code> object.
         </p>
         <p>
           NOTE: the property <code>xsd:anyURI</code> is used instead of an IRI when the object in a triple is a web resource or web address but not expected to be an RDF node in a graph, as will be the case for non-RDF resources such as code repository locations.</p>
@@ -179,10 +173,10 @@
           To ensure that permissions and obligations of use are understood:
         </p>
         <p class="req">
-          2.1.14 Ontologies <em>SHOULD</em> present a license for its use indicated with the <code>sdo:license</code> use indicating either the literal text of a license or a URL of a license using the datatype <code>xsd:anyURI</code>.
+          2.1.12 Ontologies <em>SHOULD</em> present a license for its use indicated with the <code>sdo:license</code> use indicating either the literal text of a license or a URL of a license using the datatype <code>xsd:anyURI</code>.
         </p>
         <p class="req">
-          2.1.14 Ontologies <em>MAY</em> present usage information alongside license information using the <code>sdo:usageInfo</code> property indicating either the literal text.
+          2.1.13 Ontologies <em>MAY</em> present usage information alongside license information using the <code>sdo:usageInfo</code> property indicating either the literal text.
         </p>        
         <p class="req">
           2.1.14 Ontologies <em>SHOULD</em> present a rights holding information for it indicated with properties <code>sdo:copyrightHolder</code>, <code>sdo:copyrightNotice</code> and <code>sdo:copyrightYear</code>. <code>sdo:copyrightHolder</code> may be used with a text object or, preferrably, an <code>sdo:Person</code> or <code>sdo:Organization</code> object.
@@ -191,17 +185,17 @@
           To ensure non-trivial ontologies:
         </p>
         <p class="req">
-          2.1.17 Ontologies must present at least one <code>owl:Class</code> or <code>rdfs:Property</code> or <code>owl:NamedIndividual</code> or <code>owl:Axiom</code> within the ontology file
+          2.1.15 Ontologies <em>MUST</em>> present at least one <code>owl:Class</code> or <code>rdfs:Property</code> or <code>owl:NamedIndividual</code> or <code>owl:Axiom</code> within the ontology file.
         </p>        
         <p>
-          To ensure that all the elements within a ontology are linked to the main ontology object, the <code>owl:Ontology</code>:
+          To ensure that all the elements within this ontology are linked to an ontology object:
         </p>
         <p class="req">
-          2.1.18 All <code>owl:Class</code>, <code>rdfs:Property</code> and specailised OWL property types, <code>owl:NamedIndividual</code> and <code>owl:Axiom</code> instances <em>MUST</em> indicate the ontology that defines then with the <code>rdfs:isDefinedBy</code> property.
+          2.1.16 All <code>owl:Class</code>, <code>rdfs:Property</code> and specailised OWL property types, <code>owl:NamedIndividual</code> and <code>owl:Axiom</code> instances <em>MUST</em> indicate the ontology that defines then with the <code>rdfs:isDefinedBy</code> property.
         </p>
         <p><strong>NOTE</strong>: not all of the ontology elements used within <em>this</em> ontology need be defined by it: it is expected that ontologies will reuse elements from other ontologies and, when they do, the elements reused should indicate their original defining ontology with the <code>rdfs:isDefinedBy</code> property.</p>
       </section>
-      <section id="all-element">
+      <section id="all-elements">
         <h3>2.2 All Elements</h3>
         <p>
           These requirements apply to all ontology elements, that is <code>owl:Class</code>, <code>rdfs:Property</code>, <code>owl:NamedIndividual</code> and <code>owl:Axiom</code> instances defined or described (defined elsewhere and reused) in the ontology.
@@ -210,34 +204,27 @@
           To ensure that each element is identifiable and their meaning isn't obscure or lost:
         </p>
         <p class="req">
-          2.3.2 Each element instance <em>MUST</em> have at least one title indicated using the <code>skos:prefLabel</code> property that must be a language-typed text literal value. Only one value per language is allowed.
+          2.2.1 Each element instance <em>MUST</em> have at least one title indicated using the <code>skos:prefLabel</code> property that must be a language-typed text literal value. Only one value per language is allowed.
         </p>
         <p>NOTE: the use of <code>skos:prefLabel</code> is preferred over the use of <code>rdfs:label</code> or <code>dcterms:title</code> or similar as it is clear that the property indicates the class' primary label and thus secondary labels are explicitly provisioned for with <code>skos:altLabel</code>.</p>
         <p class="req">
-          2.3.3 Each element instance <em>MUST</em> have at least one definition indicated using the <code>skos:definition</code> property that must be a language-typed text literal value. Only one value per language is allowed.
+          2.2.2 Each element instance <em>MUST</em> have at least one definition indicated using the <code>skos:definition</code> property that must be a language-typed text literal value. Only one value per language is allowed.
         </p>
         <p>NOTE: the use of <code>skos:definition</code> is preferred over the use of <code>rdfs:comment</code> or <code>dcterms:description</code> or similar as it is clear that the property <em>defines</em>, rather than just providing other, non-normative information.</p>
-        <p>
-          To ensure that every element is linked to the ontology that defines it:
-        </p>
-        <p class="req">
-          2.3.4 Each element <em>MUST</em> indicate the ontology that defines it by use of the <code>rdfs:isDefinedBy</code> property indicating an <code>owl:Ontology</code> instance or similar ontology object
-        </p>
-        <p>Note that the ontology that defines an element does not have to be the ontology in the file being validated. This is to allow for element instance reuse across multiple ontologies.</p>
         <p>
           To preserve derivation lineage:
         </p>
         <p class="req">
-          2.3.5 Provenance for a element, if different from that of the <code>owl:Ontology</code> being validated, <em>SHOULD</em> be indicated by at least one of the following properties: <code>dcterms:provenance</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
+          2.2.3 Provenance for a element, if different from that of the <code>owl:Ontology</code> being validated, <em>SHOULD</em> be indicated by at least one of the following properties: <code>dcterms:provenance</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
         </p>
         <p>
           To assist with understanding of how to use classes:
         </p>
         <p class="req">
-          2.3.6 Each element in an ontology <em>SHOULD</em> have at least one example of use indicated with a <code>skos:example</code> property that should be a text literal, preferably showing RDF source code.
+          2.2.4 Each element in an ontology <em>SHOULD</em> have at least one example of use indicated with a <code>skos:example</code> property that should be a text literal, preferably showing RDF source code.
         </p>
         <p class="req">
-          2.3.7 Each element in an ontology <em>SHOULD</em> indicate any non-IRI persistent identifiers with <code>sdo:identifier</code> properties. Custom datatypes may be implemented for identifiers, in line with the advice for the use of <code>skos:notation</code><sup><a href="https://www.w3.org/TR/skos-primer/#secnotations">ref</a></sup>
+          2.2.5 Each element in an ontology <em>SHOULD</em> indicate any non-IRI persistent identifiers with <code>sdo:identifier</code> properties. Custom datatypes may be implemented for identifiers, in line with the advice for the use of <code>skos:notation</code><sup><a href="https://www.w3.org/TR/skos-primer/#secnotations">ref</a>.</sup>
         </p>        
       </section>
       <section id="class">
@@ -282,7 +269,7 @@
           To ensure human readability and association of agents with their non-Semantic Web (real world) form:
         </p>
         <p class="req">
-          2.7.2 Each agent <em>MUST</em> indicate at least one name property with the <code>sdo:name</code> property that must be a text literal value
+          2.7.2 Each agent <em>MUST</em> indicate exactly one name property with the <code>sdo:name</code> property that must be a text literal value
         </p>
         <p>
           To ensure that agents are linked to non-Semantic Web forms of identification:
