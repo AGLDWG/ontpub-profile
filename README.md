@@ -7,7 +7,7 @@ This profile is formulated according to the [Profiles Vocabulary](https://www.w3
 
 This profile is hosted online in [Linked Data](https://www.w3.org/standards/semanticweb/data) form using a persistent web address:
 
-* <https://w3id.org/profile/ontdoc>
+* <https://w3id.org/profile/ontpub>
 
 
 ## Profile Resources
