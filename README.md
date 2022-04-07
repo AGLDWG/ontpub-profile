@@ -1,5 +1,5 @@
 # Ontology Publication Profile
-This is [profile](https://www.w3.org/TR/dx-prof/#definitions) of the [OWL](https://www.w3.org/TR/owl2-overview/), [RDFS](https://www.w3.org/TR/rdf-schema/, [schema.org](https://schema.org) and [SKOS](https://www.w3.org/TR/skos-reference/) ontologies used to define and annotate ontologies. It defines the requirements that data must satisfy to be considered conformant with this profile.
+This is [profile](https://www.w3.org/TR/dx-prof/#definitions) of the [OWL](https://www.w3.org/TR/owl2-overview/), [RDFS](https://www.w3.org/TR/rdf-schema/), [schema.org](https://schema.org) and [SKOS](https://www.w3.org/TR/skos-reference/) ontologies used to define and annotate ontologies. It defines the requirements that data must satisfy to be considered conformant with this profile.
 
 By *profile*, what is meant here is "A specification that constrains, extends, combines, or provides guidance or explanation about the usage of other specifications." (from [PROF](https://www.w3.org/TR/dx-prof/#definitions)) and, here the *other specification*(s) are OWL, RDFS, schema.org and SKOS.
 
