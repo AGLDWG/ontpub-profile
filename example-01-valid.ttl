@@ -1,0 +1,146 @@
+# baseURI: https://linked.data.gov.au/def/abisdm
+
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.com/thing/> .
+@prefix abisdm: <https://linked.data.gov.au/def/abisdm/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix sdo: <https://schema.org/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix tern: <https://w3id.org/tern/ontologies/tern/> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+<https://linked.data.gov.au/def/abisdm>
+  a owl:Ontology ;
+  skos:prefLabel "ABIS Data Management Ontology"@en ;
+  skos:definition """An ontology containing elements for data management for Australian Biodiversity Information Standard (ABIS) data. 
+  
+This ontology is not a domain model for ABIS - that is the TERN Ontology (https://w3id.org/tern/ontologies/tern/). This ontology provides non-scientific model elements for data management, such as properties to indicate whether species are endangered or not, data publication embargo periods and so on."""@en ;
+  sdo:creator <https://linked.data.gov.au/org/dawe> ;
+  sdo:publisher <https://linked.data.gov.au/org/dawe> ;
+  sdo:dateCreated "2022-03-22"^^xsd:date ;
+  sdo:dateModified "2022-04-02"^^xsd:date ;
+  sdo:dateIssued "2022-03-22"^^xsd:date ;
+  sdo:license "https://creativecommons.org/licenses/by/4.0/"^^xsd:anyURI ;
+  sdo:copyrightHolder <https://linked.data.gov.au/org/dawe> ;
+  sdo:copyrightNotice "(c) Commonwealth of Australia (Department of Agriculture, Water and the Environment), 2022" ;
+  dcterms:provenance "This ontology has been made as part of the BDR Pilot project work"@en ;
+  owl:versionIRI <https://linked.data.gov.au/def/abisdm/0.1.1> ;
+  owl:versionInfo "0.1.0" ;
+  sdo:codeRespository "https://bdr.gov.au"^^xsd:anyURI ;
+.
+
+<https://linked.data.gov.au/org/dawe>
+  a sdo:Organization ;
+  sdo:name "Department of Agriculture, Water and the Environment"@en ;
+  sdo:url "https://www.awe.gov.au"^^xsd:anyURI ;
+.
+
+abisdm:SuperClass
+    a owl:Class , rdfs:Class ;
+    rdfs:subClassOf owl:Thing ;
+    skos:prefLabel "ABIS DM Ontology Superclass" ;
+    skos:definition "A superclass of the main things in the ABIS DB Ontology" ;
+    rdfs:isDefinedBy <https://linked.data.gov.au/def/abisdm> ;
+    dcterms:provenance "Created for the Bidiversity Data Repository project. It is required for good data display within the BDR technical system."@en ;
+    skos:example """This class is not expected to be instantiated"""@en ;
+.
+
+abisdm:ConservationStatus
+  a owl:Class ;
+  rdfs:subClassOf abisdm:SuperClass , skos:Concept ;
+  skos:definition "A code indicating the conservation status of a taxon or a proxy object for a taxon, such as a taxon name"@en ;
+  skos:prefLabel "Created for the Bidiversity Data Repository project. Conservation Status"@en ;
+  dcterms:provenance "Motivated by the existence of multiple conservation status code lists" ;
+  rdfs:isDefinedBy <https://linked.data.gov.au/def/abisdm> ;
+  skos:example """# instances of this class are stored as Concepts in the Conservation Status vocabulary 
+# https://linked.data.gov.au/def/conservation-statuses, e.g.
+<https://linked.data.gov.au/def/conservation-statuses/CR> 
+    a skos:Concept , abisdm:ConservationStatus ;
+    skos:prefLabel "Critically Endangered" ;
+.""" ;
+.
+
+abisdm:conservationStatus
+  a owl:ObjectProperty ;  
+  skos:definition "Indicates a Conservation Status"@en ;
+  skos:prefLabel "conservation status"@en ;
+  dcterms:provenance "Created for the Bidiversity Data Repository project. Motivated by the existence of multiple conservation status code lists" ;
+  rdfs:isDefinedBy <https://linked.data.gov.au/def/abisdm> ;
+  sdo:rangeIncludes tern:Taxon ;
+  rdfs:range abisdm:ConservationStatus ;
+  skos:example """# the example taxon, :Calothamnus-lateralis-var-crassus, is indicated as Critically Endangered, cstat:CR
+# using a Concept from the the Conservation Status vocabulary
+@prefix ex: <http://example.com/> .
+@prefix cstat: <https://linked.data.gov.au/def/conservation-statuses/> .
+
+ex:Calothamnus-lateralis-var-crassus abisdm:conservationStatus cstat:CR .""" ;
+.
+
+abisdm:embargoEndDate
+  a owl:DatatypeProperty ;
+  skos:prefLabel "embargo end date"@en ;
+  skos:definition """The date after which the emabrgo on this Dataset no longer applies.
+  
+This property takes precedence over abisdm:embargoPeriod if both are present."""@en ;
+  rdfs:range xsd:date ;
+  rdfs:isDefinedBy <https://linked.data.gov.au/def/abisdm> ;
+  dcterms:provenance "Created for the Bidiversity Data Repository project" ;  
+  skos:example """# Dataset with a fixed embargo end date
+@prefix abisdm: <https://linked.data.gov.au/def/abisdm/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sdo: <https://schema.org/> .
+@prefix tern: <https://w3id.org/tern/ontologies/tern/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/dataset/embargoed-test-01>
+    a tern:RDFDataset ;
+    dcterms:title "Margaret River Flora" ;
+    skos:definition "202201 CBR Flora and Vegetation report_draftv1.pdf by Stream Environment and Water Pty Ltd" ;
+    dcterms:creator <http://example.org/Stream-Environment-and-Water-Pty-Ltd> ;
+    dcterms:created "2022-02-24"^^xsd:date ;
+    abisdm:embargoEndDate "2022-08-15"^^xsd:date ;
+.
+
+<http://example.org/Stream-Environment-and-Water-Pty-Ltd>
+    a sdo:Organization ;
+    sdo:name "Stream Environment and Water Pty Ltd" ;
+.""" ;
+.
+
+abisdm:embargoPeriod
+  a owl:DatatypeProperty ;
+  skos:prefLabel "embargo period"@en ;
+  skos:definition "The period of time for which this Dataset is embargoed. The time's start date must be set by the system embargoing the data. It may be calculated from a dataset creation/issued date but, if those properties are missing, should be calculated from the date at which the embargoing system recieved the Dataset."@en ;  
+  rdfs:range xsd:duration ;
+  rdfs:isDefinedBy <https://linked.data.gov.au/def/abisdm> ;
+  dcterms:provenance "Created for the Bidiversity Data Repository project" ;
+  skos:example """# Dataset with a embargo period
+@prefix abisdm: <https://linked.data.gov.au/def/abisdm/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix sdo: <https://schema.org/> .
+@prefix tern: <https://w3id.org/tern/ontologies/tern/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://example.org/dataset/embargoed-test-01>
+    a tern:RDFDataset ;
+    dcterms:title "Margaret River Flora" ;
+    skos:definition "202201 CBR Flora and Vegetation report_draftv1.pdf by Stream Environment and Water Pty Ltd" ;
+    dcterms:creator <http://example.org/Stream-Environment-and-Water-Pty-Ltd> ;
+    dcterms:created "2022-02-24"^^xsd:date ;
+    abisdm:embargoPeriod "P1Y6M"^^xsd:duration ;
+.
+
+<http://example.org/Stream-Environment-and-Water-Pty-Ltd>
+    a sdo:Organization ;
+    sdo:name "Stream Environment and Water Pty Ltd" ;
+.""" ;
+.
+

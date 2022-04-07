@@ -24,22 +24,22 @@
         <dt>URI</dt>
         <dd><code><a href="https://w3id.org/profile/ontpub">https://w3id.org/profile/ontpub</a></code></dd>
         <dt>Title</dt>
-        <dd>OntPub Profile</dd>
+        <dd>Ontology Publication Profile of OWL, RDFS, schema.org and SKOS (OntPub)</dd>
         <dt>Is Profile of</dt>
         <dd><a href="https://www.w3.org/TR/skos-reference/">SKOS</a></dd>        
         <dt>Definition</dt>
         <dd>
-          <p>This is a profile of the taxonomy data model <a href="https://www.w3.org/TR/skos-reference/">SKOS</a> - i.e. SKOS with additional constraints. It defines some compulsory properties for SKOS's <code>ConceptScheme</code>, <code>Concept</code> and <code>Collection</code> classes and ensures that certain relationships between them are present, e.g. <code>topConceptOf</code> &amp; <code>inScheme</code> linking <code>Concepts</code> to <code>ConceptSchemes</code>. It also requires goes a bit beyond 'pure' SKOS by ensuring that Concepts indicate the ConceptScheme they are defined in, which may be different to the <code>ConceptScheme</code> they re presented in. This allows OntPub-valid SKOS <code>Concepts</code> to be re-used in multiple of vocabularies efficiently.</p>
-          <p>This profile is used for multile Australian government and international vocabularies and is entirely generic, i.e. the additional constraints are not Australian or government-specific but just ensure certain technical model capabilities in the data.</p>
+          <p>This is a profile of the <a href="http://www.w3.org/TR/owl-rdf-based-semantics">OWL</a>, <a href="https://www.w3.org/TR/rdf-schema/">RDFS</a>, <a href="https://schema.org">schema.org</a> and <a href="https://www.w3.org/TR/skos-reference/">SKOS</a> ontologies used to define and annotate ontologies. It supplies requirements, defines testable rules and some other supporting resources for its use.</p>
+          <p>This profile is formulated according to the <a href="https://www.w3.org/TR/dx-prof/">Profiles Vocabulary</a>.</p>
         </dd>
         <dt>Created</dt>
         <dd>2020-06-14</dd>
         <dt>Modified</dt>
-        <dd>2021-08-31</dd>
+        <dd>2021-04-07</dd>
         <dt>Creator</dt>
-        <dd><a href="https://linked.data.gov.au/org/surround">SURROUND Australia Pty Ltd</a></dd>
+        <dd><a href="https://orcid.org/0000-0002-8742-7730">Nicholas J. Car</a></dd>
         <dt>Publisher</dt>
-        <dd><a href="https://linked.data.gov.au/org/surround">SURROUND Australia Pty Ltd</a></dd>
+        <dd><a href="https://linked.data.gov.au/org/agldwg">Australian Government Linked Data Working Group</a></dd>
         <dt>Repository</dt>
         <dd><a href="https://github.com/surroundaustralia/ontpub-profile">https://github.com/surroundaustralia/ontpub-profile</a></dd>
         <dt><a href="https://w3c.github.io/dx-prof/prof/#Property:hasResource">Profile Resources</a></dt>
@@ -47,12 +47,10 @@
           <ol>
             <li><a href="#https://w3id.org/profile/ontpub/spec">Specification</a></li>
             <li><a href="#https://w3id.org/profile/ontpub/validator">Validator</a></li>
-            <li><a href="#https://w3id.org/profile/ontpub/htv">How to validate instructions</a></li>
-            <li><a href="#https://w3id.org/profile/ontpub/example/valid">Valid example data</a></li>
-            <li><a href="#https://w3id.org/profile/ontpub/example/invalid">Invalid example data 1</a></li>
-            <li><a href="#https://w3id.org/profile/ontpub/example/invalid-2">Invalid example data 2</a></li>
-            <li><a href="#https://w3id.org/profile/ontpub/sdo">schema.org mapping</a></li>
-            <li><a href="#https://w3id.org/profile/ontpub/repo">Profile code repository</a></li>            
+            <li><a href="#https://w3id.org/profile/vocpub/htv">How to validate instructions</a></li>
+            <li><a href="#https://w3id.org/profile/ontpub/repo">Profile code repository</a></li>
+            <li><a href="#https://w3id.org/profile/ontpub/example-01-valid">Example 01 Valid</a></li>
+            <li><a href="#https://w3id.org/profile/ontpub/example-01-invalid">Example 01 Invalid</a></li>
           </ol>
         </dd>
       </dl>
@@ -105,7 +103,7 @@
           <td colspan="2"><h3>3. How to Validate instructions</h3></td>
         </tr>
         <tr>
-          <th>Description</th><td>Written instructions on how to use this profile's validator on data</td>
+          <th>Description</th><td>Written instructions on how to use the VocPub profile's validator on data which applies to this profile too</td>
         </tr>
         <tr>
           <th>Artifact</th><td><a href="https://w3id.org/profile/ontpub/htv">https://w3id.org/profile/ontpub/htv</a></td>
@@ -117,85 +115,9 @@
           <th>Format</th><td><code><a href="https://w3id.org/mediatype/text/html">text/html</a></code></td>
         </tr>
       </table>     
-      <table class="props" id="https://w3id.org/profile/ontpub/example/valid">
-        <tr>
-          <td colspan="2"><h3>4. Example of a valid vocabulary</h3></td>
-        </tr>
-        <tr>
-          <th>Description</th><td>A vocabulary that can shown to be valid - conforming to OntPub - using to the Validator in this profile</td>
-        </tr>
-        <tr>
-          <th>Artifact</th><td><a href="https://w3id.org/profile/ontpub/example/valid">https://w3id.org/profile/ontpub/example/valid</a></td>
-        </tr>
-        <tr>
-          <th>Role</th><td><code><a href="http://www.w3.org/ns/dx/prof/role/example">role:example</a></code></td>
-        </tr>
-        <tr>
-          <th>Conforms</th><td><a href="https://w3id.org/profile/ontpub">https://w3id.org/profile/ontpub</a></td>
-        </tr>
-        <tr>
-          <th>Format</th><td><code><a href="https://w3id.org/mediatype/text/turtle">text/turtle</a></code></td>
-        </tr>
-      </table>
-      <table class="props" id="https://w3id.org/profile/ontpub/example/invalid">
-        <tr>
-          <td colspan="2"><h3>5. Example of an invalid vocabulary</h3></td>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <td>This example vocabulary does not satisfy the Specification's Requirement 2.1.5 (the ConceptScheme is missing a dcterms:created date)</td>
-        </tr>
-        <tr>
-          <th>Artifact</th><td><a href="https://w3id.org/profile/ontpub/example/invalid">https://w3id.org/profile/ontpub/example/invalid</a></td>
-        </tr>
-        <tr>
-          <th>Role</th><td><code><a href="http://www.w3.org/ns/dx/prof/role/example">role:example</a></code></td>
-        </tr>
-        <tr>
-          <th>Format</th><td><code><a href="https://w3id.org/mediatype/text/turtle">text/turtle</a></code></td>
-        </tr>
-      </table>
-      <table class="props" id="https://w3id.org/profile/ontpub/example/invalid-2">
-        <tr>
-          <td colspan="2"><h3>6. Example of a second invalid vocabulary</h3></td>
-        </tr>
-        <tr>
-          <th>Description</th>
-          <td>This example vocabulary does not satisfy the Specification's Requirements 2.3.1 & 2.3.2 (one Concept has two titles, another is missing rdfs:isDefinedBy)</td>
-        </tr>
-        <tr>
-          <th>Artifact</th><td><a href="https://w3id.org/profile/ontpub/example/invalid-2">https://w3id.org/profile/ontpub/example/invalid-2</a></td>
-        </tr>
-        <tr>
-          <th>Role</th><td><code><a href="http://www.w3.org/ns/dx/prof/role/example">role:example</a></code></td>
-        </tr>
-        <tr>
-          <th>Format</th><td><code><a href="https://w3id.org/mediatype/text/turtle">text/turtle</a></code></td>
-        </tr>
-      </table>
-      <table class="props" id="https://w3id.org/profile/ontpub/sdo">
-        <tr>
-          <td colspan="2"><h3>7. schema.org mapping</h3></td>
-        </tr>
-        <tr>
-          <th>Description</th><td>A vocabulary of mappings of all the RDF, RDFS, OWL & SKOS etc. elements in this profile to the <a href="https://schema.org">schema.org</a> vocabulary.</td>
-        </tr>        
-        <tr>
-          <th>Artifact</th><td><a href="https://w3id.org/profile/ontpub/sdo">https://w3id.org/profile/ontpub/sdo</a></td>
-        </tr>
-        <tr>
-          <th>Role</th><td><code><a href="http://www.w3.org/ns/dx/prof/role/mapping">role:mapping</a></code></td>
-        </tr>
-        <tr>
-          <th>Conforms</th><td><a href="http://www.w3.org/TR/owl-rdf-based-semantics">OWL 2 Web Ontology Language RDF-Based Semantics (Second Edition)</a></td>
-        </tr>
-        <tr>
-          <th>Format</th><td><code><a href="https://w3id.org/mediatype/text/turtle">text/turtle</a></code></td>
-        </tr>
-      </table> 
       <table class="props" id="https://w3id.org/profile/ontpub/repo">
         <tr>
-          <td colspan="2"><h3>8. Profile code repository</h3></td>
+          <td colspan="2"><h3>4. Profile code repository</h3></td>
         </tr>
         <tr>
           <th>Description</th><td>Code repository storing all Profile artifacts</td>
@@ -206,7 +128,38 @@
         <tr>
           <th>Role</th><td><code><a href="http://www.w3.org/ns/dx/prof/role/repository">role:repository</a></code></td>
         </tr>
-      </table>             
+      </table>
+      <table class="props" id="https://w3id.org/profile/ontpub/example-01-valid">
+        <tr>
+          <td colspan="2"><h3>5. Example 01 Valid</h3></td>
+        </tr>
+        <tr>
+          <th>Description</th><td>Example RDF data valid according to the validator</td>
+        </tr>        
+        <tr>
+          <th>Artifact</th><td><a href="https://w3id.org/profile/ontpub/example-01-valid">https://w3id.org/profile/ontpub/example-01-valid</a></td>
+        </tr>
+        <tr>
+          <th>Role</th><td><code><a href="http://www.w3.org/ns/dx/prof/role/example">role:example</a></code></td>
+        </tr>
+        <tr>
+          <th>Conforms</th><td><a href="https://w3id.org/profile/ontpub">OntPub</a></td>
+        </tr>        
+      </table>
+      <table class="props" id="https://w3id.org/profile/ontpub/example-01-invalid">
+        <tr>
+          <td colspan="2"><h3>6. Example 01 Invalid</h3></td>
+        </tr>
+        <tr>
+          <th>Description</th><td>Example RDF data invalid according to the validator. Notes on the invalid elements are given at the top of the files</td>
+        </tr>        
+        <tr>
+          <th>Artifact</th><td><a href="hhttps://w3id.org/profile/ontpub/example-01-invalid">https://w3id.org/profile/ontpub/example-01-invalid</a></td>
+        </tr>
+        <tr>
+          <th>Role</th><td><code><a href="http://www.w3.org/ns/dx/prof/role/example">role:example</a></code></td>
+        </tr>
+      </table>            
     </section>    
     <p>&nbsp;</p>
   </div><!-- #content -->
