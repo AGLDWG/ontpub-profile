@@ -14,11 +14,22 @@
     a owl:Ontology ;
     dcterms:title "Ontology Publication Profile Validator" ;
     dcterms:description "SHACL Shapes to validate RDF data according to the Ontology Publications Profile" ;
-    dcterms:creator <https://linked.data.gov.au/org/surround> ;
-    dcterms:publisher <https://linked.data.gov.au/org/surround> ;
+    dcterms:creator <https://orcid.org/0000-0002-8742-7730> ;
+    dcterms:publisher <https://linked.data.gov.au/org/agldwg> ;
     dcterms:created "2022-03-19"^^xsd:date ;
-    dcterms:modified "2022-03-23"^^xsd:date ;
+    dcterms:modified "2022-04-24"^^xsd:date ;
     owl:versionIRI <https://w3id.org/profile/ontpub/validator/1.0> ;
+.
+
+<https://linked.data.gov.au/org/agldwg> a sdo:Organization ;
+    sdo:name "Australian Government Linked Data Working Group" ;
+    sdo:url "https://www.linked.data.gov.au"^^xsd:anyURI ;
+.
+
+<https://orcid.org/0000-0002-8742-7730> a sdo:Person ;
+    sdo:name "Nicholas J. Car" ;
+    sdo:email "nicholas.car@anu.edu.au"^^xsd:anyURI ;
+    sdo:identifier "ttps://orcid.org/0000-0002-8742-7730"^^xsd:anyURI ;
 .
 
 #
