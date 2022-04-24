@@ -51,7 +51,7 @@ To cite this profile, please use the following (formulated in [BibTex](http://ww
 
 
 ## Contact
-*publisher -- proposed:*  
+*publisher:*  
 ![](style/agldwg-logo-ochre-150.png)  
 **Australian Government Linked Data Working Group**  
 <https://www.linked.data.gov.au>  
