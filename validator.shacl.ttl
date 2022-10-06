@@ -29,7 +29,7 @@
 <https://orcid.org/0000-0002-8742-7730> a sdo:Person ;
     sdo:name "Nicholas J. Car" ;
     sdo:email "nicholas.car@anu.edu.au"^^xsd:anyURI ;
-    sdo:identifier "ttps://orcid.org/0000-0002-8742-7730"^^xsd:anyURI ;
+    sdo:identifier "https://orcid.org/0000-0002-8742-7730"^^xsd:anyURI ;
 .
 
 #
