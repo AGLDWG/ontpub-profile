@@ -46,32 +46,48 @@
         sh:path rdf:type ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        sh:message "Requirement 2.1.2 Each ontology MUST be presented as a single owl:Ontology object & Requirment 2.1.3 Each ontology MUST be presented in a single file which does not contain information other than that which is directly part of the ontology and the file is considered the point-of-truth" ;
+        sh:message "Requirement 2.1.2 Each ontology MUST be presented as a single owl:Ontology object & Requirement 2.1.3 Each ontology MUST be presented in a single file which does not contain information other than that which is directly part of the ontology and the file is considered the point-of-truth" ;
     ] ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.4>
 	a sh:NodeShape ;
 	sh:targetClass owl:Ontology ;
-        sh:message "Requirement 2.1.4 Each ontology MUST have exactly one title, a text literal, indicated using the skos:prefLabel property" ;
-        sh:property [
-        sh:path skos:prefLabel ;
-        sh:minCount 1 ;
-        sh:uniqueLang true ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-    ]
+    sh:message "Requirement 2.1.4 Each ontology MUST have exactly one title, a text literal, indicated using the skos:prefLabel or the sdo:name property" ;
+    sh:or (
+        [
+            sh:path skos:prefLabel ;
+            sh:minCount 1 ;
+            sh:uniqueLang true ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+        [
+            sh:path sdo:name ;
+            sh:minCount 1 ;
+            sh:uniqueLang true ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+    ) ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.5>
 	a sh:NodeShape ;
 	sh:targetClass owl:Ontology ;
-        sh:message "Requirement 2.1.4 Each ontology MUST have exactly one definition, a text literal text, indicated using the skos:definition property" ;
-        sh:property [
-        sh:path skos:definition ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-    ]
+        sh:message "Requirement 2.1.4 Each ontology MUST have exactly one definition, a text literal text, indicated using either the skos:definition or sdo:description property" ;
+    sh:or (
+        [
+            sh:path skos:definition ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+        [
+            sh:path sdo:name ;
+            sh:minCount 1 ;
+            sh:maxCount 1 ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+    )
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.6>
@@ -248,11 +264,11 @@
     sh:targetClass owl:Ontology ;
     sh:property [
         a sh:PropertyShape ;
-        sh:path sdo:codeRespository ;
+        sh:path sdo:codeRepository ;
         sh:datatype xsd:anyURI ;
         sh:minCount 1;
         sh:severity sh:Warning ;
-        sh:message "Requirement 2.1.11: OWL ontologies SHOULD indicate any online version controlled source code repository storing the ontology and related content with the sdo:codeRespository with a xsd:anyURI object." ;
+        sh:message "Requirement 2.1.11: OWL ontologies SHOULD indicate any online version controlled source code repository storing the ontology and related content with the sdo:codeRepository with a xsd:anyURI object." ;
     ] ;
 .
 
@@ -325,27 +341,45 @@
 <https://w3id.org/profile/ontpub/req/2.2.1>
     a sh:NodeShape ;
     sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path skos:prefLabel ;
-        sh:minCount 1 ;
-        sh:uniqueLang true ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        sh:message "Requirement 2.2.1: Each element instance MUST have at least one title indicated using the skos:prefLabel property that must be a language-typed text literal value. Only one value per language is allowed." ;
-    ] ;
+    sh:or (
+        [
+            a sh:PropertyShape ;
+            sh:path skos:prefLabel ;
+            sh:minCount 1 ;
+            sh:uniqueLang true ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+        [
+            a sh:PropertyShape ;
+            sh:path sdo:name ;
+            sh:minCount 1 ;
+            sh:uniqueLang true ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+    ) ;
+    sh:message "Requirement 2.2.1: Each element instance MUST have at least one title indicated using either the skos:prefLabel or sdo:name property that must be either a string or a language-typed text literal value. Only one value per language is allowed if languages are used." ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.2.2>
     a sh:NodeShape ;
     sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path skos:definition ;
-        sh:minCount 1 ;
-        sh:uniqueLang true ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        sh:message "Requirement 2.2.2: Each element instance MUST have at least one definition indicated using the skos:definition property that must be a language-typed text literal value. Only one value per language is allowed." ;
-    ] ;
+    sh:or (
+        [
+            a sh:PropertyShape ;
+            sh:path sdo:description ;
+            sh:minCount 1 ;
+            sh:uniqueLang true ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+        [
+            a sh:PropertyShape ;
+            sh:path sdo:description ;
+            sh:minCount 1 ;
+            sh:uniqueLang true ;
+            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
+        ]
+    ) ;
+    sh:message "Requirement 2.2.2: Each element instance MUST have at least one definition indicated using the skos:definition or sdo:description property that must be either string or a language-typed text literal value. Only one value per language is allowed if languages are used." ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.2.3>
