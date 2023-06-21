@@ -150,10 +150,10 @@
           To be able to link ontologies to their non-ontology source information:
         </p>
         <p class="req">
-          2.1.9 Provenance for an <code>owl:Ontology</code> <em>MUST</em> be indicated by at least one of the following properties: <code>dcterms:provenance</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
+          2.1.9 Provenance for an <code>owl:Ontology</code> <em>MUST</em> be indicated by at least one of the following properties: <code>sos:historyNote</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
         </p>
         <p>
-          If an ontology is based on another Semantic Web resource, such as an ontology or a vocabulary, <code>prov:wasDerivedFrom</code> should be used to indicate that resource's IRI. If the ontology is based on a resource that is identified by a IRI but which is not a Semantic Web resource, <code>dcterms:source</code> should be used to indicate the resource's IRI. If the ontology is based on something which cannot be identified by IRI, a statement about the thing should be given in a literal value indicated with the <code>dcterms:provenance</code> property. If the ontology is not based on any other resource or source of information, i.e. this ontology is its only expression, this should be communicated by use of the <code>dcterms:provenance</code> indicating the phrase "This ontology is expressed for the first time here".
+          If an ontology is based on another Semantic Web resource, such as an ontology or a vocabulary, <code>prov:wasDerivedFrom</code> should be used to indicate that resource's IRI. If the ontology is based on a resource that is identified by a IRI but which is not a Semantic Web resource, <code>dcterms:source</code> should be used to indicate the resource's IRI. If the ontology is based on something which cannot be identified by IRI, a statement about the thing should be given in a literal value indicated with the <code>sos:historyNote</code> property. If the ontology is not based on any other resource or source of information, i.e. this ontology is its only expression, this should be communicated by use of the <code>sos:historyNote</code> indicating the phrase "This ontology is expressed for the first time here".
         </p>
         <p>To keep track of versions:</p>
         <p class="req">
@@ -213,7 +213,7 @@
           To preserve derivation lineage:
         </p>
         <p class="req">
-          2.2.3 Provenance for a element, if different from that of the <code>owl:Ontology</code> being validated, <em>SHOULD</em> be indicated by at least one of the following properties: <code>dcterms:provenance</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
+          2.2.3 Provenance for a element, if different from that of the <code>owl:Ontology</code> being validated, <em>SHOULD</em> be indicated by at least one of the following properties: <code>sos:historyNote</code>, <code>dcterms:source</code> or <code>prov:wasDerivedFrom</code>.
         </p>
         <p>
           To assist with understanding of how to use classes:

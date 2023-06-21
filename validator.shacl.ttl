@@ -1,524 +1,665 @@
-# OntPub
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix sdo: <https://schema.org/> .
-@prefix sh: <http://www.w3.org/ns/shacl#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX sdo: <https://schema.org/>
+PREFIX sh: <http://www.w3.org/ns/shacl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-
-<https://w3id.org/profile/ontpub/validator>
-    a owl:Ontology ;
-    dcterms:title "Ontology Publication Profile Validator" ;
-    dcterms:description "SHACL Shapes to validate RDF data according to the Ontology Publications Profile" ;
-    dcterms:creator <https://orcid.org/0000-0002-8742-7730> ;
-    dcterms:publisher <https://linked.data.gov.au/org/agldwg> ;
-    dcterms:created "2022-03-19"^^xsd:date ;
-    dcterms:modified "2022-04-24"^^xsd:date ;
-    owl:versionIRI <https://w3id.org/profile/ontpub/validator/1.0> ;
+<https://w3id.org/profile/ontpub/req/2.1.10>
+    a sh:NodeShape ;
+    sh:property [
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.1.10: OWL ontologies SHOULD indicate a version using the property owl:versionIRI with an IRI object." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path owl:versionIRI ;
+            sh:severity sh:Warning
+        ] ;
+    sh:targetClass owl:Ontology ;
 .
 
-<https://linked.data.gov.au/org/agldwg> a sdo:Organization ;
-    sdo:name "Australian Government Linked Data Working Group" ;
-    sdo:url "https://www.linked.data.gov.au"^^xsd:anyURI ;
+<https://w3id.org/profile/ontpub/req/2.1.11>
+    a sh:NodeShape ;
+    sh:property [
+            a sh:PropertyShape ;
+            sh:datatype xsd:anyURI ;
+            sh:message "Requirement 2.1.11: OWL ontologies SHOULD indicate any online version controlled source code repository storing the ontology and related content with the sdo:codeRepository with a xsd:anyURI object." ;
+            sh:minCount 1 ;
+            sh:path sdo:codeRepository ;
+            sh:severity sh:Warning
+        ] ;
+    sh:targetClass owl:Ontology ;
 .
 
-<https://orcid.org/0000-0002-8742-7730> a sdo:Person ;
-    sdo:name "Nicholas J. Car" ;
-    sdo:email "nicholas.car@anu.edu.au"^^xsd:anyURI ;
-    sdo:identifier "ttps://orcid.org/0000-0002-8742-7730"^^xsd:anyURI ;
+<https://w3id.org/profile/ontpub/req/2.1.12>
+    a sh:NodeShape ;
+    sh:property [
+        a sh:PropertyShape ;
+        sh:or (
+            [
+                sh:datatype xsd:anyURI ;
+            ]
+            [
+                sh:nodeKind sh:Literal ;
+            ]
+        ) ;
+        sh:message "Requirement 2.1.12: Ontologies SHOULD present a license for its use indicated with the sdo:license use indicating either the literal text of a license or a URL of a license using the datatype xsd:anyURI." ;
+        sh:minCount 1 ;
+        sh:path sdo:license ;
+        sh:severity sh:Warning
+    ] ;
+    sh:targetClass owl:Ontology ;
 .
 
-#
-#   Ontology
-#
-# Requirement-2.1.1 so far un-implemented in SHACL
+<https://w3id.org/profile/ontpub/req/2.1.13>
+    a sh:NodeShape ;
+    sh:property [
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.1.13: Ontologies MAY present usage information alongside license information using the sdo:usageInfo property indicating literal text." ;
+            sh:nodeKind sh:Literal ;
+            sh:path sdo:usageInfo
+        ] ;
+    sh:targetClass owl:Ontology ;
+.
 
-# Requirement-2.1.2 included below
+<https://w3id.org/profile/ontpub/req/2.1.14a>
+    a sh:NodeShape ;
+    sh:property [
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.1.14: Ontologies SHOULD present a copyright information for it indicated with properties sdo:copyrightHolder, sdo:copyrightNotice and sdo:copyrightYear. sdo:copyrightHolder may be used with a text object or, preferrably, an sdo:Person or sdo:Organization object." ;
+            sh:minCount 1 ;
+            sh:or (
+                [
+                    sh:class sdo:Organization
+                ]
+                [
+                    sh:class sdo:Person
+                ]
+            ) ;
+            sh:path sdo:copyrightHolder ;
+            sh:severity sh:Warning
+        ] ;
+    sh:targetClass owl:Ontology ;
+.
+
+<https://w3id.org/profile/ontpub/req/2.1.15>
+    a sh:NodeShape ;
+    sh:property [
+            sh:message "Requirement 2.1.15: Ontologies MUST present at least one owl:Class or rdfs:Property or owl:NamedIndividual or owl:Axiom within the ontology file" ;
+            sh:nodeKind sh:IRI ;
+            sh:path [
+                    sh:inversePath rdf:type
+                ]
+        ] ;
+    sh:targetNode
+        rdfs:Property ,
+        owl:AnnotationProperty ,
+        owl:Axiom ,
+        owl:Class ,
+        owl:DatatypeProperty ,
+        owl:FunctionalProperty ,
+        owl:InverseProperty ,
+        owl:NamedIndividual ,
+        owl:ObjectProperty ;
+.
+
+<https://w3id.org/profile/ontpub/req/2.1.16>
+    a sh:NodeShape ;
+    sh:property [
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.1.16: All owl:Class, rdfs:Property and specailised OWL property types, owl:NamedIndividual and owl:Axiom instances MUST indicate the ontology that defines then with the rdfs:isDefinedBy property." ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:path rdfs:isDefinedBy
+        ] ;
+    sh:targetClass
+        rdfs:Property ,
+        owl:AnnotationProperty ,
+        owl:Axiom ,
+        owl:Class ,
+        owl:DatatypeProperty ,
+        owl:FunctionalProperty ,
+        owl:InverseProperty ,
+        owl:NamedIndividual ,
+        owl:ObjectProperty ;
+.
 
 <https://w3id.org/profile/ontpub/req/2.1.2+3>
     a sh:NodeShape ;
-    sh:targetClass owl:Ontology ;
     sh:property [
-        sh:path rdf:type ;
-        sh:minCount 1 ;
-        sh:maxCount 1 ;
-        sh:message "Requirement 2.1.2 Each ontology MUST be presented as a single owl:Ontology object & Requirement 2.1.3 Each ontology MUST be presented in a single file which does not contain information other than that which is directly part of the ontology and the file is considered the point-of-truth" ;
-    ] ;
+            sh:maxCount 1 ;
+            sh:message "Requirement 2.1.2 Each ontology MUST be presented as a single owl:Ontology object & Requirement 2.1.3 Each ontology MUST be presented in a single file which does not contain information other than that which is directly part of the ontology and the file is considered the point-of-truth" ;
+            sh:minCount 1 ;
+            sh:path rdf:type
+        ] ;
+    sh:targetClass owl:Ontology ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.4>
-	a sh:NodeShape ;
-	sh:targetClass owl:Ontology ;
+    a sh:NodeShape ;
     sh:message "Requirement 2.1.4 Each ontology MUST have exactly one title, a text literal, indicated using the skos:prefLabel or the sdo:name property" ;
     sh:or (
-        [
-            sh:path skos:prefLabel ;
-            sh:minCount 1 ;
-            sh:uniqueLang true ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-        [
-            sh:path sdo:name ;
-            sh:minCount 1 ;
-            sh:uniqueLang true ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-    ) ;
+            [
+                sh:minCount 1 ;
+                sh:datatype rdf:langString ;
+                sh:path skos:prefLabel ;
+                sh:uniqueLang true
+            ]
+            [
+                sh:minCount 1 ;
+                sh:or (
+                        [
+                            sh:datatype xsd:string
+                        ]
+                        [
+                            sh:datatype rdf:langString
+                        ]
+                    ) ;
+                sh:path sdo:name ;
+                sh:uniqueLang true
+            ]
+        ) ;
+    sh:targetClass owl:Ontology ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.5>
-	a sh:NodeShape ;
-	sh:targetClass owl:Ontology ;
-        sh:message "Requirement 2.1.4 Each ontology MUST have exactly one definition, a text literal text, indicated using either the skos:definition or sdo:description property" ;
+    a sh:NodeShape ;
+    sh:message "Requirement 2.1.4 Each ontology MUST have exactly one definition, a text literal text, indicated using either the skos:definition or sdo:description property" ;
     sh:or (
-        [
-            sh:path skos:definition ;
-            sh:minCount 1 ;
-            sh:maxCount 1 ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-        [
-            sh:path sdo:name ;
-            sh:minCount 1 ;
-            sh:maxCount 1 ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-    )
+            [
+                sh:maxCount 1 ;
+                sh:minCount 1 ;
+                sh:or (
+                        [
+                            sh:datatype xsd:string
+                        ]
+                        [
+                            sh:datatype rdf:langString
+                        ]
+                    ) ;
+                sh:path skos:definition
+            ]
+            [
+                sh:maxCount 1 ;
+                sh:minCount 1 ;
+                sh:or (
+                        [
+                            sh:datatype xsd:string
+                        ]
+                        [
+                            sh:datatype rdf:langString
+                        ]
+                    ) ;
+                sh:path sdo:description
+            ]
+        ) ;
+    sh:targetClass owl:Ontology ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.6>
-	a sh:NodeShape ;
-	sh:targetClass owl:Ontology ;
-        sh:property [
-            sh:path sdo:dateCreated ;
-            sh:minCount 1 ;
+    a sh:NodeShape ;
+    sh:property
+        [
             sh:maxCount 1 ;
-            sh:or (
-                [ sh:datatype xsd:dateTime ]
-                [ sh:datatype xsd:date ]
-                [ sh:datatype xsd:dateTimeStamp ]
-            ) ;
             sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the sdo:dateCreated, sdo:dateModified & sdo:dateIssued properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
-        ] ;
-        sh:property [
-            sh:path sdo:dateModified ;
             sh:minCount 1 ;
-            sh:maxCount 1 ;
             sh:or (
-                [ sh:datatype xsd:dateTime ]
-                [ sh:datatype xsd:date ]
-                [ sh:datatype xsd:dateTimeStamp ]
-            ) ;
+                    [
+                        sh:datatype xsd:dateTime
+                    ]
+                    [
+                        sh:datatype xsd:date
+                    ]
+                    [
+                        sh:datatype xsd:dateTimeStamp
+                    ]
+                ) ;
+            sh:path sdo:dateCreated
+        ] ,
+        [
+            sh:maxCount 1 ;
             sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the sdo:dateCreated, sdo:dateModified & sdo:dateIssued properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
-        ] ;
-        sh:property [
-            sh:path sdo:dateIssued ;
             sh:minCount 1 ;
-            sh:maxCount 1 ;
             sh:or (
-                [ sh:datatype xsd:dateTime ]
-                [ sh:datatype xsd:date ]
-                [ sh:datatype xsd:dateTimeStamp ]
-            ) ;
+                    [
+                        sh:datatype xsd:dateTime
+                    ]
+                    [
+                        sh:datatype xsd:date
+                    ]
+                    [
+                        sh:datatype xsd:dateTimeStamp
+                    ]
+                ) ;
+            sh:path sdo:dateModified
+        ] ,
+        [
+            sh:maxCount 1 ;
             sh:message "Requirement 2.1.5 Each ontology MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the sdo:dateCreated, sdo:dateModified & sdo:dateIssued properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
+            sh:minCount 1 ;
+            sh:or (
+                    [
+                        sh:datatype xsd:dateTime
+                    ]
+                    [
+                        sh:datatype xsd:date
+                    ]
+                    [
+                        sh:datatype xsd:dateTimeStamp
+                    ]
+                ) ;
+            sh:path sdo:dateIssued
         ] ;
+    sh:targetClass owl:Ontology ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.7>
-	a sh:NodeShape ;
-	sh:property [
-	    sh:path sdo:creator ;
-        sh:minCount 1 ;
-	    sh:description "Requirement 2.1.7 Each ontology MUST have at least one creator, indicated using sdo:creator and at least one sdo:publisher property that must be IRI values indicating agents, that is instances of sdo:Person, sdo:Organization or a subclass of either" ;
-        sh:class sdo:Organization  , sdo:Person ;
-	] ;
-	sh:property [
-	    sh:path sdo:publisher ;
-        sh:minCount 1 ;
-	    sh:description "Requirement 2.1.7 Each ontology MUST have at least one creator, indicated using sdo:creator and at least one sdo:publisher property that must be IRI values indicating agents, that is instances of sdo:Person, sdo:Organization or a subclass of either" ;
-        sh:class sdo:Organization  , sdo:Person ;
-	] ;
+    a sh:NodeShape ;
+    sh:property
+        [
+            sh:class
+                sdo:Organization ,
+                sdo:Person ;
+            sh:description "Requirement 2.1.7 Each ontology MUST have at least one creator, indicated using sdo:creator and at least one sdo:publisher property that must be IRI values indicating agents, that is instances of sdo:Person, sdo:Organization or a subclass of either" ;
+            sh:minCount 1 ;
+            sh:path sdo:creator
+        ] ,
+        [
+            sh:class
+                sdo:Organization ,
+                sdo:Person ;
+            sh:description "Requirement 2.1.7 Each ontology MUST have at least one creator, indicated using sdo:creator and at least one sdo:publisher property that must be IRI values indicating agents, that is instances of sdo:Person, sdo:Organization or a subclass of either" ;
+            sh:minCount 1 ;
+            sh:path sdo:publisher
+        ] ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.8>
-	a sh:NodeShape ;
-	sh:property [
-	    sh:path sdo:contributor ;
-        sh:minCount 1 ;
-	    sh:description "Requirement 2.1.8 Each ontology MAY have at least any number of contributors, indicated using sdo:contributor property that must be a IRI value indicating an agent, that is an instance of sdo:Person, sdo:Organization or a subclass of either" ;
-        sh:or (
-            [ sh:class sdo:Organization ]
-            [ sh:class sdo:Person ]
-        ) ;
-	] ;
+    a sh:NodeShape ;
+    sh:property [
+            sh:description "Requirement 2.1.8 Each ontology MAY have at least any number of contributors, indicated using sdo:contributor property that must be a IRI value indicating an agent, that is an instance of sdo:Person, sdo:Organization or a subclass of either" ;
+            sh:minCount 1 ;
+            sh:or (
+                    [
+                        sh:class sdo:Organization
+                    ]
+                    [
+                        sh:class sdo:Person
+                    ]
+                ) ;
+            sh:path sdo:contributor
+        ] ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9>
     a sh:NodeShape ;
-    sh:message "Requirement 2.1.9 Provenance for an owl:Ontology MUST be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
+    sh:message "Requirement 2.1.9 Provenance for an owl:Ontology MUST be indicated by at least one of the following properties: skos:historyNote, dcterms:source or prov:wasDerivedFrom." ;
     sh:or (
-        [
-            sh:minCount 1 ;
-            sh:path prov:wasDerivedFrom ;
-            sh:message "This is a message about prov:wasDerivedFrom" ;
-        ]
-        [
-            sh:minCount 1 ;
-            sh:path dcterms:source ;
-            sh:message "This is a message about dcterms:source" ;
-        ]
-        [
-            sh:minCount 1 ;
-            sh:path dcterms:provenance ;
-            sh:message "This is a message about dcterms:provenance" ;
-        ]
-    ) ;
+            [
+                sh:message "This is a message about prov:wasDerivedFrom" ;
+                sh:minCount 1 ;
+                sh:path prov:wasDerivedFrom
+            ]
+            [
+                sh:message "This is a message about dcterms:source" ;
+                sh:minCount 1 ;
+                sh:path dcterms:source
+            ]
+            [
+                sh:message "This is a message about skos:historyNote" ;
+                sh:minCount 1 ;
+                sh:path skos:historyNote
+            ]
+        ) ;
     sh:targetClass owl:Ontology ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9b>
     a sh:NodeShape ;
-    sh:targetSubjectsOf dcterms:provenance ;
     sh:property [
-        a sh:PropertyShape ;
-        sh:maxCount 1 ;
-        sh:path dcterms:provenance ;
-        sh:message "Requirement 2.1.9b: You MUST NOT use dcterms:provenance property more than once on any object." ;
-    ] ;
+            a sh:PropertyShape ;
+            sh:maxCount 1 ;
+            sh:message "Requirement 2.1.9b: You MUST NOT use skos:historyNote property more than once on any object." ;
+            sh:path skos:historyNote
+        ] ;
+    sh:targetSubjectsOf skos:historyNote ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9c>
     a sh:NodeShape ;
-    sh:targetSubjectsOf dcterms:source ;
     sh:property [
-        a sh:PropertyShape ;
-        sh:maxCount 1 ;
-        sh:path dcterms:source ;
-        sh:message "Requirement 2.1.9c: You MUST NOT use dcterms:source property more than once on any object." ;
-    ] ;
+            a sh:PropertyShape ;
+            sh:maxCount 1 ;
+            sh:message "Requirement 2.1.9c: You MUST NOT use dcterms:source property more than once on any object." ;
+            sh:path dcterms:source
+        ] ;
+    sh:targetSubjectsOf dcterms:source ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9d>
     a sh:NodeShape ;
-    sh:targetSubjectsOf prov:wasDerivedFrom ;
     sh:property [
-        a sh:PropertyShape ;
-        sh:maxCount 1 ;
-        sh:path prov:wasDerivedFrom ;
-        sh:message "Requirement 2.1.9d: You MUST NOT use prov:wasDerivedFrom property more than once on any object." ;
-    ] ;
+            a sh:PropertyShape ;
+            sh:maxCount 1 ;
+            sh:message "Requirement 2.1.9d: You MUST NOT use prov:wasDerivedFrom property more than once on any object." ;
+            sh:path prov:wasDerivedFrom
+        ] ;
+    sh:targetSubjectsOf prov:wasDerivedFrom ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9e>
     a sh:NodeShape ;
-    sh:targetSubjectsOf dcterms:source ;
     sh:property [
-        a sh:PropertyShape ;
-        sh:path dcterms:source ;
-        sh:datatype xsd:anyURI ;
-        sh:message "Requirement 2.1.9e: Whenever dcterms:source is used, it must be a datatype property indicating an object of type xsd:anyURI" ;
-    ] ;
+            a sh:PropertyShape ;
+            sh:datatype xsd:anyURI ;
+            sh:message "Requirement 2.1.9e: Whenever dcterms:source is used, it must be a datatype property indicating an object of type xsd:anyURI" ;
+            sh:path dcterms:source
+        ] ;
+    sh:targetSubjectsOf dcterms:source ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9f>
     a sh:NodeShape ;
-    sh:targetSubjectsOf dcterms:provenance ;
     sh:property [
-        a sh:PropertyShape ;
-        sh:path dcterms:provenance ;
-        sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        sh:message "Requirement 2.1.9f: Whenever dcterms:provenance is used, it must be a datatype property indicating an object of type xsd:string or rdf:LangString" ;
-    ] ;
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.1.9f: Whenever skos:historyNote is used, it must be a datatype property indicating an object of type xsd:string or rdf:LangString" ;
+            sh:or (
+                    [
+                        sh:datatype xsd:string
+                    ]
+                    [
+                        sh:datatype rdf:langString
+                    ]
+                ) ;
+            sh:path skos:historyNote
+        ] ;
+    sh:targetSubjectsOf skos:historyNote ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.1.9g>
     a sh:NodeShape ;
+    sh:property [
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.1.9g: Whenever prov:wasDerivedFrom is used, it must be an object property indicating an IRI" ;
+            sh:nodeKind sh:IRI ;
+            sh:path prov:wasDerivedFrom
+        ] ;
     sh:targetSubjectsOf prov:wasDerivedFrom ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path prov:wasDerivedFrom ;
-        sh:nodeKind sh:IRI ;
-        sh:message "Requirement 2.1.9g: Whenever prov:wasDerivedFrom is used, it must be an object property indicating an IRI" ;
-    ] ;
 .
-
-<https://w3id.org/profile/ontpub/req/2.1.10>
-    a sh:NodeShape ;
-    sh:targetClass owl:Ontology ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path owl:versionIRI ;
-        sh:nodeKind sh:IRI ;
-        sh:minCount 1;
-        sh:severity sh:Warning ;
-        sh:message "Requirement 2.1.10: OWL ontologies SHOULD indicate a version using the property owl:versionIRI with an IRI object." ;
-    ] ;
-.
-
-<https://w3id.org/profile/ontpub/req/2.1.11>
-    a sh:NodeShape ;
-    sh:targetClass owl:Ontology ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path sdo:codeRepository ;
-        sh:datatype xsd:anyURI ;
-        sh:minCount 1;
-        sh:severity sh:Warning ;
-        sh:message "Requirement 2.1.11: OWL ontologies SHOULD indicate any online version controlled source code repository storing the ontology and related content with the sdo:codeRepository with a xsd:anyURI object." ;
-    ] ;
-.
-
-<https://w3id.org/profile/ontpub/req/2.1.12>
-    a sh:NodeShape ;
-    sh:targetClass owl:Ontology ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path sdo:license ;
-        sh:datatype xsd:anyURI ;
-        sh:minCount 1;
-        sh:severity sh:Warning ;
-        sh:message "Requirement 2.1.12: Ontologies SHOULD present a license for its use indicated with the sdo:license use indicating either the literal text of a license or a URL of a license using the datatype xsd:anyURI." ;
-    ] ;
-.
-
-<https://w3id.org/profile/ontpub/req/2.1.13>
-    a sh:NodeShape ;
-    sh:targetClass owl:Ontology ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path sdo:usageInfo ;
-        sh:nodeKind sh:Literal ;
-        sh:message "Requirement 2.1.13: Ontologies MAY present usage information alongside license information using the sdo:usageInfo property indicating literal text." ;
-    ] ;
-.
-
-<https://w3id.org/profile/ontpub/req/2.1.14a>
-    a sh:NodeShape ;
-    sh:targetClass owl:Ontology ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path sdo:copyrightHolder ;
-        sh:or (
-            [ sh:class sdo:Organization ]
-            [ sh:class sdo:Person ]
-        ) ;
-        sh:minCount 1;
-        sh:severity sh:Warning ;
-        sh:message "Requirement 2.1.14: Ontologies SHOULD present a copyright information for it indicated with properties sdo:copyrightHolder, sdo:copyrightNotice and sdo:copyrightYear. sdo:copyrightHolder may be used with a text object or, preferrably, an sdo:Person or sdo:Organization object." ;
-    ] ;
-.
-
-<https://w3id.org/profile/ontpub/req/2.1.15>
-    a sh:NodeShape ;
-    sh:targetNode owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
-    sh:property [
-        sh:path [ sh:inversePath rdf:type ] ;
-        sh:nodeKind sh:IRI ;
-        sh:message "Requirement 2.1.15: Ontologies MUST present at least one owl:Class or rdfs:Property or owl:NamedIndividual or owl:Axiom within the ontology file" ;
-    ] ;
-.
-
-<https://w3id.org/profile/ontpub/req/2.1.16>
-    a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
-    sh:property [
-        a sh:PropertyShape ;
-        sh:path rdfs:isDefinedBy ;
-        sh:minCount 1 ;
-        sh:nodeKind sh:IRI ;
-        sh:message "Requirement 2.1.16: All owl:Class, rdfs:Property and specailised OWL property types, owl:NamedIndividual and owl:Axiom instances MUST indicate the ontology that defines then with the rdfs:isDefinedBy property." ;
-    ] ;
-.
-
-#
-#   All Elements
-#
 
 <https://w3id.org/profile/ontpub/req/2.2.1>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
-    sh:or (
-        [
-            a sh:PropertyShape ;
-            sh:path skos:prefLabel ;
-            sh:minCount 1 ;
-            sh:uniqueLang true ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-        [
-            a sh:PropertyShape ;
-            sh:path sdo:name ;
-            sh:minCount 1 ;
-            sh:uniqueLang true ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-    ) ;
     sh:message "Requirement 2.2.1: Each element instance MUST have at least one title indicated using either the skos:prefLabel or sdo:name property that must be either a string or a language-typed text literal value. Only one value per language is allowed if languages are used." ;
+    sh:or (
+            [
+                a sh:PropertyShape ;
+                sh:minCount 1 ;
+                sh:or (
+                        [
+                            sh:datatype xsd:string
+                        ]
+                        [
+                            sh:datatype rdf:langString
+                        ]
+                    ) ;
+                sh:path skos:prefLabel ;
+                sh:uniqueLang true
+            ]
+            [
+                a sh:PropertyShape ;
+                sh:minCount 1 ;
+                sh:or (
+                        [
+                            sh:datatype xsd:string
+                        ]
+                        [
+                            sh:datatype rdf:langString
+                        ]
+                    ) ;
+                sh:path sdo:name ;
+                sh:uniqueLang true
+            ]
+        ) ;
+    sh:targetClass
+        rdfs:Property ,
+        owl:AnnotationProperty ,
+        owl:Axiom ,
+        owl:Class ,
+        owl:DatatypeProperty ,
+        owl:FunctionalProperty ,
+        owl:InverseProperty ,
+        owl:NamedIndividual ,
+        owl:ObjectProperty ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.2.2>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
-    sh:or (
-        [
-            a sh:PropertyShape ;
-            sh:path sdo:description ;
-            sh:minCount 1 ;
-            sh:uniqueLang true ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-        [
-            a sh:PropertyShape ;
-            sh:path sdo:description ;
-            sh:minCount 1 ;
-            sh:uniqueLang true ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-        ]
-    ) ;
     sh:message "Requirement 2.2.2: Each element instance MUST have at least one definition indicated using the skos:definition or sdo:description property that must be either string or a language-typed text literal value. Only one value per language is allowed if languages are used." ;
+    sh:or (
+            [
+                a sh:PropertyShape ;
+                sh:minCount 1 ;
+                sh:datatype rdf:langString ;
+                sh:path skos:definition ;
+                sh:uniqueLang true
+            ]
+            [
+                a sh:PropertyShape ;
+                sh:minCount 1 ;
+                sh:or (
+                        [
+                            sh:datatype xsd:string
+                        ]
+                        [
+                            sh:datatype rdf:langString
+                        ]
+                    ) ;
+                sh:path sdo:description ;
+                sh:uniqueLang true
+            ]
+        ) ;
+    sh:targetClass
+        rdfs:Property ,
+        owl:AnnotationProperty ,
+        owl:Axiom ,
+        owl:Class ,
+        owl:DatatypeProperty ,
+        owl:FunctionalProperty ,
+        owl:InverseProperty ,
+        owl:NamedIndividual ,
+        owl:ObjectProperty ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.2.3>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:or (
-        [
-            sh:minCount 1 ;
-            sh:path prov:wasDerivedFrom ;
-            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
-        ]
-        [
-            sh:minCount 1 ;
-            sh:path dcterms:source ;
-            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
-        ]
-        [
-            sh:minCount 1 ;
-            sh:path dcterms:provenance ;
-            sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: dcterms:provenance, dcterms:source or prov:wasDerivedFrom." ;
-        ]
-    ) ;
+            [
+                sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: skos:historyNote, dcterms:source or prov:wasDerivedFrom." ;
+                sh:minCount 1 ;
+                sh:path prov:wasDerivedFrom
+            ]
+            [
+                sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: skos:historyNote, dcterms:source or prov:wasDerivedFrom." ;
+                sh:minCount 1 ;
+                sh:path dcterms:source
+            ]
+            [
+                sh:message "Requirement 2.2.3: Provenance for a element, if different from that of the owl:Ontology being validated, SHOULD be indicated by at least one of the following properties: skos:historyNote, dcterms:source or prov:wasDerivedFrom." ;
+                sh:minCount 1 ;
+                sh:path skos:historyNote
+            ]
+        ) ;
     sh:severity sh:Warning ;
+    sh:targetClass
+        rdfs:Property ,
+        owl:AnnotationProperty ,
+        owl:Axiom ,
+        owl:Class ,
+        owl:DatatypeProperty ,
+        owl:FunctionalProperty ,
+        owl:InverseProperty ,
+        owl:NamedIndividual ,
+        owl:ObjectProperty ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.2.4>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
-        a sh:PropertyShape ;
-        sh:path skos:example ;
-        sh:minCount 1 ;
-        sh:severity sh:Warning ;
-        sh:message "Requirement 2.2.4: Each element in an ontology SHOULD have at least one example of use indicated with a skos:example property that should be a text literal, preferably showing RDF source code." ;
-    ] ;
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.2.4: Each element in an ontology SHOULD have at least one example of use indicated with a skos:example property that should be a text literal, preferably showing RDF source code." ;
+            sh:minCount 1 ;
+            sh:path skos:example ;
+            sh:severity sh:Warning
+        ] ;
+    sh:targetClass
+        rdfs:Property ,
+        owl:AnnotationProperty ,
+        owl:Axiom ,
+        owl:Class ,
+        owl:DatatypeProperty ,
+        owl:FunctionalProperty ,
+        owl:InverseProperty ,
+        owl:NamedIndividual ,
+        owl:ObjectProperty ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.2.5>
     a sh:NodeShape ;
-    sh:targetClass owl:Class , rdfs:Property , owl:NamedIndividual , owl:Axiom , owl:ObjectProperty , owl:DatatypeProperty , owl:AnnotationProperty , owl:FunctionalProperty , owl:InverseProperty ;
     sh:property [
-        a sh:PropertyShape ;
-        sh:path sdo:identifier ;
-        sh:nodeKind sh:Literal ;
-        sh:message "Requirement 2.2.5: Each element in an ontology SHOULD indicate any non-IRI persistent identifiers with sdo:identifier properties. Custom datatypes may be implemented for identifiers, in line with the advice for the use of skos:notation." ;
-    ] ;
+            a sh:PropertyShape ;
+            sh:message "Requirement 2.2.5: Each element in an ontology SHOULD indicate any non-IRI persistent identifiers with sdo:identifier properties. Custom datatypes may be implemented for identifiers, in line with the advice for the use of skos:notation." ;
+            sh:nodeKind sh:Literal ;
+            sh:path sdo:identifier
+        ] ;
+    sh:targetClass
+        rdfs:Property ,
+        owl:AnnotationProperty ,
+        owl:Axiom ,
+        owl:Class ,
+        owl:DatatypeProperty ,
+        owl:FunctionalProperty ,
+        owl:InverseProperty ,
+        owl:NamedIndividual ,
+        owl:ObjectProperty ;
 .
 
-#
-#   owl:Class
-#
-
-# 2.3.1 Each owl:Class instance's IRI's unique element SHOULD be presented in uppercase-leading CamelCase and in the singular form, e.g. for a class indicating school students, SchoolStudent, not schoolstudent or schoolStudent or SchoolStudents.
-
-#
-#   rdfs:Property
-#
-
-# 2.4.1 Each rdfs:Property instance's IRI's unique element SHOULD be presented in lowercase-leading CamelCase, e.g. for a property indicating a parent, hasParent, not hasparent or HasParent
-
-#
-#   owl:NamedIndividual
-#
-
-# 2.5.1 Each owl:NamedIndividual instance's IRI's unique element SHOULD be presented in lowercase-leading CamelCase, e.g. for a Named Individual called Julius Ceasar, juliusCeasar, not JuliusCeasar or juliusceasar
-
-#
-#   owl:Axiom
-#
-
-# 2.6.1 Each owl:Axiom instance, if identified with an IRI, SHOULD have that IRI's unique element presented in uppercase-leading CamelCase and in the singular form, e.g. for an axiom indicating that a Man s a Person, ManIsAPerson, not manIsAPerson or manisaperson or man-is-a-person.
-
-#
-#   Agent
-#
-
-# 2.7.1 Each agent associated with an ontology MUST be typed as an sdo:Person, sdo:Organization or a subclass of either
-
 <https://w3id.org/profile/ontpub/req/2.7.2>
-	a sh:NodeShape ;
-	sh:targetClass sdo:Organization , sdo:Person ;
-        sh:property [
-            sh:path sdo:name ;
-            sh:minCount 1 ;
+    a sh:NodeShape ;
+    sh:property [
             sh:maxCount 1 ;
-            sh:or ( [ sh:datatype xsd:string ] [ sh:datatype rdf:langString ] ) ;
-            sh:message "Requirement 2.7.2: Each agent MUST indicate at exactly one name property with the sdo:name property that must be a text literal value"
+            sh:message "Requirement 2.7.2: Each agent MUST indicate at exactly one name property with the sdo:name property that must be a text literal value" ;
+            sh:minCount 1 ;
+            sh:or (
+                    [
+                        sh:datatype xsd:string
+                    ]
+                    [
+                        sh:datatype rdf:langString
+                    ]
+                ) ;
+            sh:path sdo:name
         ] ;
+    sh:targetClass
+        sdo:Organization ,
+        sdo:Person ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.7.3a>
-	a sh:NodeShape ;
-	sh:targetClass sdo:Organization ;
+    a sh:NodeShape ;
     sh:property [
-        sh:path sdo:url ;
-        sh:minCount 1 ;
-        sh:datatype xsd:anyURI ;
-        sh:message "Requirement 2.7.3: Each organisation MUST indicate an sdo:url property with a URL value" ;
-    ] ;
+            sh:datatype xsd:anyURI ;
+            sh:message "Requirement 2.7.3: Each organisation MUST indicate an sdo:url property with a URL value" ;
+            sh:minCount 1 ;
+            sh:path sdo:url
+        ] ;
+    sh:targetClass sdo:Organization ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.7.3b>
-	a sh:NodeShape ;
-	sh:targetClass sdo:Person ;
+    a sh:NodeShape ;
     sh:property [
-        sh:path sdo:email ;
-        sh:minCount 1 ;
-        sh:datatype xsd:anyURI ;
-        sh:message "Requirement 2.7.3: Each person MUST indicate an sdo:email property with an email value" ;
-    ] ;
+            sh:datatype xsd:anyURI ;
+            sh:message "Requirement 2.7.3: Each person MUST indicate an sdo:email property with an email value" ;
+            sh:minCount 1 ;
+            sh:path sdo:email
+        ] ;
+    sh:targetClass sdo:Person ;
 .
 
 <https://w3id.org/profile/ontpub/req/2.7.4>
-	a sh:NodeShape ;
-	sh:targetClass sdo:Person , sdo:Organization ;
-    sh:property [
-        sh:path sdo:affiliation ;
-        sh:or (
-            [ sh:class sdo:Organization ]
-            [ sh:class sdo:Person ]
-        ) ;
-        sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations."
-    ] ;
-    sh:property [
-        sh:path sdo:parentOrganization ;
-        sh:or (
-            [ sh:class sdo:Organization ]
-            [ sh:class sdo:Person ]
-        ) ;
-        sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations."
-    ] ;
-    sh:property [
-        sh:path sdo:subOrganization ;
-        sh:or (
-            [ sh:class sdo:Organization ]
-            [ sh:class sdo:Person ]
-        ) ;
-        sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations."
-    ] ;
+    a sh:NodeShape ;
+    sh:property
+        [
+            sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations." ;
+            sh:or (
+                    [
+                        sh:class sdo:Organization
+                    ]
+                    [
+                        sh:class sdo:Person
+                    ]
+                ) ;
+            sh:path sdo:affiliation
+        ] ,
+        [
+            sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations." ;
+            sh:or (
+                    [
+                        sh:class sdo:Organization
+                    ]
+                    [
+                        sh:class sdo:Person
+                    ]
+                ) ;
+            sh:path sdo:parentOrganization
+        ] ,
+        [
+            sh:message "Requirement 2.7.4: One agent MAY be affiliated with another using schema.org agent/agent linking properties, such as sdo:affiliation between persons and organisations or sdo:parentOrganization and similar between organizations." ;
+            sh:or (
+                    [
+                        sh:class sdo:Organization
+                    ]
+                    [
+                        sh:class sdo:Person
+                    ]
+                ) ;
+            sh:path sdo:subOrganization
+        ] ;
+    sh:targetClass
+        sdo:Organization ,
+        sdo:Person ;
 .
 
-# 2.7.5 Other schema.org Agent properties, such as sdo:honorificPrefix and so on many be used for additional agent information
+<https://w3id.org/profile/ontpub/validator>
+    a owl:Ontology ;
+    owl:versionIRI <https://w3id.org/profile/ontpub/validator/1.1> ;
+    owl:versionInfo "1.1: changed dcterms:provenance to skos:historyNote, updated validator metadata to OntPub 1.1" ;
+    skos:definition "SHACL Shapes to validate RDF data according to the Ontology Publications Profile" ;
+    skos:historyNote "This validator was updated in July 2023 to conform to itself" ;
+    skos:prefLabel "Ontology Publication Profile Validator"@en ;
+    sdo:codeRepository "https://github.com/agldwg/ontpub-profile"^^xsd:anyURI ;
+    sdo:copyrightHolder <https://linked.data.gov.au/org/agldwg> ;
+    sdo:copyrightYear "2023"^^xsd:gYear ;
+    sdo:creator <https://orcid.org/0000-0002-8742-7730> ;
+    sdo:dateCreated "2022-03-19"^^xsd:date ;
+    sdo:dateIssued "2023-09-21"^^xsd:date ;
+    sdo:dateModified "2023-09-21"^^xsd:date ;
+    sdo:license "https://creativecommons.org/licenses/by/4.0/"^^xsd:anyURI ;
+    sdo:publisher <https://linked.data.gov.au/org/agldwg> ;
+.
+
+<https://orcid.org/0000-0002-8742-7730>
+    a sdo:Person ;
+    sdo:email "nicholas.car@anu.edu.au"^^xsd:anyURI ;
+    sdo:identifier "https://orcid.org/0000-0002-8742-7730"^^xsd:anyURI ;
+    sdo:name "Nicholas J. Car" ;
+.
+
+<https://linked.data.gov.au/org/agldwg>
+    a sdo:Organization ;
+    sdo:name "Australian Government Linked Data Working Group" ;
+    sdo:url "https://www.linked.data.gov.au"^^xsd:anyURI ;
+.
