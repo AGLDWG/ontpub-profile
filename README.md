@@ -7,7 +7,7 @@ This profile is formulated in a formal and formulaic way according to the [Profi
 
 This profile is hosted online in [Linked Data](https://www.w3.org/standards/semanticweb/data) form using a persistent web address:
 
-* <https://w3id.org/profile/ontpub>
+* <https://linked.data.gov.au/def/ontpub>
 
 
 ## Profile Resources
@@ -15,7 +15,7 @@ This profile is hosted online in [Linked Data](https://www.w3.org/standards/sema
 ### Specification
 This profile's _specification_ is the resource that contains its normative rules. It is presented within the file [specification.html](specification.html) and it is able to be viewed online at its persistent web location:
 
-* <https://w3id.org/profile/ontpub/specification>
+* <https://linked.data.gov.au/def/ontpub/spec>
 
 ### Validator
 This profile's rules, as defined in the _specification_, are presented for machine validation of RDF vocabularies in the Shapes Constraint Language ([SHACL](https://www.w3.org/TR/shacl/)) file [validator.shacl.ttl](validator.shacl.ttl).
@@ -24,7 +24,7 @@ Tools such as [pySHACL](https://github.com/RDFLib/pySHACL) and the online [SHACL
 
 The validator's persistent web location is:
 
-* <https://w3id.org/profile/ontpub/validator>
+* <https://linked.data.gov.au/def/ontpub/validator>
 
 ### How To Validate
 This profile refers users on to the [VocPub Profile](https://w3id.org/profile/vocpub)'s _How To Validate_ resource which is a small instruction on how to use SHACL validation tooling with data. That information is relevant to this profile and its validator.
@@ -42,10 +42,10 @@ To cite this profile, please use the following (formulated in [BibTex](http://ww
 @software{ontdoc-profile,
   author = {{Nicholas J. Car}},
   title = {{Ontology Publication Profile}},
-  version = {1.0},
-  date = {2022},
+  version = {1.4},
+  date = {2025},
   publisher = {{Australian Government Linked Data Working Group}},
-  url = {https://w3id.org/profile/ontpub}
+  url = {https://linked.data.gov.au/def/ontpub}
 }
 ``` 
 
