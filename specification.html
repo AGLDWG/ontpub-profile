@@ -30,7 +30,7 @@
         <dt>Issued</dt>
         <dd>2023-09-21</dd>
         <dt>Modified</dt>
-        <dd>2025-07-26</dd>
+        <dd>2026-02-06</dd>
         <dt>Creator</dt>
         <dd><a href="https://orcid.org/0000-0002-8742-7730">Nicholas J. Car</a></dd>
         <dt>Publisher</dt>
@@ -45,6 +45,7 @@
         <dd>This validator was made to improve teh consistency of Australian ontology formulation, initially by CSIRO and then handed to the AGLDWG</dd>
         <dt>Version Info</dt>
         <dd>
+          <p>1.5 2026-01: allow schema:license to indicate an IRI</p>
           <p>1.4 2025-07: Changed to linked.data.gov.au IRI</p>
           <p>1.3 2025-07: Alignment to VocPub, Own use of schema.org as much as possible</p>
           <p>1.2 2025-06: Added schema:citation to allowed history properties</p>
@@ -184,7 +185,7 @@
           To ensure that permissions and obligations of use are understood:
         </p>
         <p class="req">
-          2.1.12 Ontologies <em>SHOULD</em> present a license for its use indicated with the <code>sdo:license</code> use indicating either the literal text of a license or a URL of a license using the datatype <code>xsd:anyURI</code>.
+          2.1.12 Ontologies <em>SHOULD</em> present a license for its use indicated with the <code>sdo:license</code> predicate preferentially indicating the IRI of a license, if in RDF form, or a literal URL (datatype <code>xsd:anyURI</code>) if online but not in RDF form or as literal text (xsd:string) if the license is neither in RDF form nor online
         </p>
         <p class="req">
           2.1.13 Ontologies <em>MAY</em> present usage information alongside license information using the <code>sdo:usageInfo</code> property indicating either the literal text.
