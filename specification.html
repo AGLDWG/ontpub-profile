@@ -152,7 +152,7 @@
           2.1.5 Each ontology <em>MUST</em> have exactly one definition value indicated using either the <code>skos:definition</code> or <code>sdo:description</code> property that must be a text literal values
         </p>
         <p class="req">
-          2.1.6 Each ontology <em>MUST</em> have exactly one created date and exactly one modified date indicated using the <code>sdo:dateCreated</code> and <code>sdo:dateModified</code> properties respectively. Each ontology <em>SHOULD</em> have exactly one issued date indicated using <code>sdo:dateIssued</code>. These dates must be <code>xsd:date</code>, <code>xsd:dateTime</code> or <code>xsd:dateTimeStamp</code> literal values. Issued-date constraint results are reported as warnings.
+          2.1.6 Each ontology <em>MUST</em> have exactly one created date and exactly one modified date indicated using the <code>sdo:dateCreated</code> and <code>sdo:dateModified</code> properties respectively, with <code>xsd:date</code>, <code>xsd:dateTime</code>, <code>xsd:dateTimeStamp</code> or <code>xsd:gYearMonth</code> literal values. Each ontology <em>SHOULD</em> have exactly one issued date indicated using <code>sdo:dateIssued</code> with an <code>xsd:date</code>, <code>xsd:dateTime</code> or <code>xsd:dateTimeStamp</code> literal value. Issued-date constraint results are reported as warnings.
         </p>
         <p>Maintainers may know when an artefact was published without knowing a distinct issued date. Issued-date metadata is therefore recommended, and its absence or invalidity produces a warning rather than a blocking violation.</p>
         <p class="req">
