@@ -132,7 +132,8 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     rdfs:isDefinedBy ont: ;
     sh:property
         <https://linked.data.gov.au/def/ontpub/req/2.1.6-property-shape-01> ,
-        <https://linked.data.gov.au/def/ontpub/req/2.1.6-property-shape-02> ;
+        <https://linked.data.gov.au/def/ontpub/req/2.1.6-property-shape-02> ,
+        <https://linked.data.gov.au/def/ontpub/req/2.1.6-property-shape-03> ;
     sh:targetClass owl:Ontology ;
     schema:description "Req 2.1.6" ;
     schema:name "Req 2.1.6" ;
@@ -636,6 +637,22 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     ) ;
     sh:path schema:dateCreated ;
     schema:name "Ontology dates - created" ;
+.
+
+<https://linked.data.gov.au/def/ontpub/req/2.1.6-property-shape-03>
+    a sh:PropertyShape ;
+    rdfs:isDefinedBy ont: ;
+    sh:message "Requirement 2.1.6: Each ontology SHOULD have exactly one issued date indicated using schema:dateIssued with an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal value." ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:or (
+        [ sh:datatype xsd:date ]
+        [ sh:datatype xsd:dateTime ]
+        [ sh:datatype xsd:dateTimeStamp ]
+    ) ;
+    sh:path schema:dateIssued ;
+    sh:severity sh:Warning ;
+    schema:name "Ontology dates - issued" ;
 .
 
 <https://linked.data.gov.au/def/ontpub/req/2.1.7-property-shape-01>

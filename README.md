@@ -18,7 +18,9 @@ This profile's _specification_ is the resource that contains its normative rules
 * <https://linked.data.gov.au/def/ontpub/spec>
 
 ### Validator
-This profile's rules, as defined in the _specification_, are presented for machine validation of RDF vocabularies in the Shapes Constraint Language ([SHACL](https://www.w3.org/TR/shacl/)) file [validator.shacl.ttl](validator.shacl.ttl).
+This profile's rules, as defined in the _specification_, are presented for machine validation of RDF vocabularies in the Shapes Constraint Language ([SHACL](https://www.w3.org/TR/shacl/)) file [validators/validator.ttl](validators/validator.ttl).
+
+This is the canonical validator source and the artifact served by the validator's persistent IRI. The older top-level `validator.shacl.ttl` copy has been removed; its previous versions remain available in Git history.
 
 Tools such as [pySHACL](https://github.com/RDFLib/pySHACL) and the online [SHACL Playground](https://shacl.org/playground/) or [SHACL Play!](https://shacl-play.sparna.fr/play/) can be used with this shape file to validate vocabulary files.
 
