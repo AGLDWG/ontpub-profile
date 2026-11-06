@@ -171,11 +171,14 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 <https://linked.data.gov.au/def/ontpub/req/2.1.4>
     a sh:NodeShape ;
     rdfs:isDefinedBy ont: ;
-    sh:message "Requirement 2.1.4 Each ontology MUST have exactly one title, a text literal, indicated using the skos:prefLabel or the schema:name property" ;
+    sh:message "Requirement 2.1.4 Each ontology MUST have exactly one title, an xsd:string or rdf:langString literal, indicated using the skos:prefLabel or the schema:name property" ;
     sh:or (
         
         [
-            sh:datatype rdf:langString ;
+            sh:or (
+                [ sh:datatype xsd:string ]
+                [ sh:datatype rdf:langString ]
+            ) ;
             sh:minCount 1 ;
             sh:path skos:prefLabel ;
             sh:uniqueLang true ;

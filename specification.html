@@ -146,7 +146,7 @@
           To ensure ontology can be catalogued effectively and governed:
         </p>
         <p class="req">
-          2.1.4 Each ontology <em>MUST</em> have exactly one title indicated using either the <code>skos:prefLabel</code> or <code>sdo:name</code> property that must be a text literal value
+          2.1.4 Each ontology <em>MUST</em> have exactly one title indicated using either the <code>skos:prefLabel</code> or <code>sdo:name</code> property that must be an <code>xsd:string</code> or <code>rdf:langString</code> literal value
         </p>
         <p class="req">
           2.1.5 Each ontology <em>MUST</em> have exactly one definition value indicated using either the <code>skos:definition</code> or <code>sdo:description</code> property that must be a text literal values
@@ -216,9 +216,9 @@
           To ensure that each element is identifiable and their meaning isn't obscure or lost:
         </p>
         <p class="req">
-          2.2.1 Each element instance <em>MUST</em> have at least one title indicated using either the <code>skos:prefLabel</code> or <code>sdo:name</code> property that must be a language-typed text literal value. Only one value per language is allowed.
+          2.2.1 Each element instance <em>MUST</em> have at least one title indicated using either the <code>skos:prefLabel</code> or <code>sdo:name</code> property that must be an <code>xsd:string</code> or <code>rdf:langString</code> literal value. Only one value per language is allowed if language tags are used.
         </p>
-        <p>NOTE: the use of <code>skos:prefLabel</code> is preferred over the use of <code>rdfs:label</code> or <code>dcterms:title</code> or similar as it is clear that the property indicates the class' primary label and thus secondary labels are explicitly provisioned for with <code>skos:altLabel</code>, however <code>sdo:description</code> is also permitted to facilitate use of the <code>schema.org</code> namespace only.</p>
+        <p>NOTE: the use of <code>skos:prefLabel</code> is preferred over the use of <code>rdfs:label</code> or <code>dcterms:title</code> or similar as it is clear that the property indicates the class' primary label and thus secondary labels are explicitly provisioned for with <code>skos:altLabel</code>, however <code>sdo:name</code> is also permitted to facilitate use of the <code>schema.org</code> namespace only.</p>
         <p class="req">
           2.2.2 Each element instance <em>MUST</em> have at least one definition indicated using the <code>skos:definition</code> or <code>sdo:description</code> property that must be a language-typed text literal value. Only one value per language is allowed.
         </p>

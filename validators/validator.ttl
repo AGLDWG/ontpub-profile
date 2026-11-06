@@ -513,8 +513,11 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 <https://linked.data.gov.au/def/ontpub/req/2.1.4-property-shape-01>
     a sh:PropertyShape ;
     rdfs:isDefinedBy ont: ;
-    sh:datatype rdf:langString ;
-    sh:message "Requirement 2.1.4: OWL Ontologies MUST have exactly one title, a text literal, indicated using the skos:prefLabel or the schema:name property" ;
+    sh:or (
+        [ sh:datatype xsd:string ]
+        [ sh:datatype rdf:langString ]
+    ) ;
+    sh:message "Requirement 2.1.4: OWL Ontologies MUST have exactly one title, an xsd:string or rdf:langString literal, indicated using the skos:prefLabel or the schema:name property" ;
     sh:minCount 1 ;
     sh:path skos:prefLabel ;
     sh:uniqueLang true ;
@@ -524,7 +527,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 <https://linked.data.gov.au/def/ontpub/req/2.1.4-property-shape-02>
     a sh:PropertyShape ;
     rdfs:isDefinedBy ont: ;
-    sh:message "Requirement 2.1.4: OWL Ontologies MUST have exactly one title, a text literal, indicated using the skos:prefLabel or the schema:name property" ;
+    sh:message "Requirement 2.1.4: OWL Ontologies MUST have exactly one title, an xsd:string or rdf:langString literal, indicated using the skos:prefLabel or the schema:name property" ;
     sh:minCount 1 ;
     sh:or (
         
