@@ -588,7 +588,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     a sh:PropertyShape ;
     rdfs:isDefinedBy ont: ;
     sh:maxCount 1 ;
-    sh:message "Requirement 2.1.6: OWL Ontologies MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the schema:dateCreated & schema:dateModified properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
+    sh:message "Requirement 2.1.6: Each ontology MUST have exactly one modified date indicated using schema:dateModified with an xsd:date, xsd:dateTime, xsd:dateTimeStamp or xsd:gYearMonth literal value." ;
     sh:minCount 1 ;
     sh:or (
         
@@ -602,6 +602,9 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         
         [
             sh:datatype xsd:dateTimeStamp ;
+        ]
+        [
+            sh:datatype xsd:gYearMonth ;
         ]
     ) ;
     sh:path schema:dateModified ;
@@ -612,7 +615,7 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
     a sh:PropertyShape ;
     rdfs:isDefinedBy ont: ;
     sh:maxCount 1 ;
-    sh:message "Requirement 2.1.6: OWL Ontologies MUST have exactly one created date, exactly one modified date and exactly one issued date indicated using the schema:dateCreated & schema:dateModified properties respectively that must be either an xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values" ;
+    sh:message "Requirement 2.1.6: Each ontology MUST have exactly one created date indicated using schema:dateCreated with an xsd:date, xsd:dateTime, xsd:dateTimeStamp or xsd:gYearMonth literal value." ;
     sh:minCount 1 ;
     sh:or (
         
@@ -626,6 +629,9 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         
         [
             sh:datatype xsd:dateTimeStamp ;
+        ]
+        [
+            sh:datatype xsd:gYearMonth ;
         ]
     ) ;
     sh:path schema:dateCreated ;

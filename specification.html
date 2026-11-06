@@ -152,7 +152,7 @@
           2.1.5 Each ontology <em>MUST</em> have exactly one definition value indicated using either the <code>skos:definition</code> or <code>sdo:description</code> property that must be a text literal values
         </p>
         <p class="req">
-          2.1.6 Each ontology <em>MUST</em> have exactly one created, exactly one modified and exactly one issued date indicated using the <code>sdo:dateCreated</code>, <code>sdo:dateModified</code> &amp; <code>sdo:dateIssued</code> properties respectively that must be either xsd:date, xsd:dateTime or xsd:dateTimeStamp literal values
+          2.1.6 Each ontology <em>MUST</em> have exactly one created date and exactly one modified date indicated using the <code>sdo:dateCreated</code> and <code>sdo:dateModified</code> properties respectively, with <code>xsd:date</code>, <code>xsd:dateTime</code>, <code>xsd:dateTimeStamp</code> or <code>xsd:gYearMonth</code> literal values. Each ontology <em>MUST</em> have exactly one issued date indicated using <code>sdo:dateIssued</code> with an <code>xsd:date</code>, <code>xsd:dateTime</code> or <code>xsd:dateTimeStamp</code> literal value.
         </p>      
         <p class="req">
           2.1.7 Each ontology <em>MUST</em> have at least one creator, indicated using <code>sdo:creator</code> and at least one <code>sdo:publisher</code> property that must be IRI values indicating agents, that is instances of <code>sdo:Person</code>, <code>sdo:Organization</code> or a subclass of either
